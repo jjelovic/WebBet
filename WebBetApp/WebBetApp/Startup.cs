@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebBetApp.Main;
 using WebBetApp.Model.Database;
 
 namespace WebBetApp
@@ -28,6 +29,7 @@ namespace WebBetApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
             services.AddDbContext<WebBetDbContext>(options =>
                                                    options.UseSqlServer(Configuration.GetConnectionString("WebBetDbContext")));
         }
