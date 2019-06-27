@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebBetApp.Main;
 using WebBetApp.Model.Database;
+using WebBetApp.Model.Database.Testing;
 
 namespace WebBetApp
 {
@@ -42,7 +43,7 @@ namespace WebBetApp
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               app.UseDeveloperExceptionPage();
             }
 
             app.UseCors(options => options.WithOrigins("http://localhost:4200")
@@ -50,6 +51,16 @@ namespace WebBetApp
                                           .AllowAnyHeader());
 
             app.UseMvc();
+
+            //Create database if not exist
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<WebBetDbContext>();
+                context.Database.EnsureCreated();
+
+                //Fill with test data
+                TestDataFactory.Fill(context);
+            }
         }
     }
 }
