@@ -32,6 +32,9 @@ namespace WebBetApp
             services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
             services.AddDbContext<WebBetDbContext>(options =>
                                                    options.UseSqlServer(Configuration.GetConnectionString("WebBetDbContext")));
+
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +44,10 @@ namespace WebBetApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options.WithOrigins("http://localhost:4200")
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader());
 
             app.UseMvc();
         }
