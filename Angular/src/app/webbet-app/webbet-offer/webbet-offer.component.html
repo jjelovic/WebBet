@@ -1,0 +1,59 @@
+<div>
+
+      <div>
+        <div class="p-2 mb-1 bg-secondary text-white" >Top ponuda</div>
+        <table class="table table-borderless" >
+          <thead class="thead-light">
+            <th></th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>1X</th>
+            <th>X2</th>
+            <th>12</th>
+          </thead>
+     
+          <tbody *ngFor="let item of topOfferList">
+             <tr *ngFor="let match of item.topOfferMatches">
+              <td>{{match.pair }}</td>
+              <td>{{match.type1 | number : '1.2'}}</td> 
+              <td>{{match.typeX | number : '1.2'}}</td> 
+              <td>{{match.type2 | number : '1.2'}}</td> 
+              <td>{{match.type1X | number : '1.2'}}</td> 
+              <td>{{match.type2X | number : '1.2'}}</td> 
+              <td>{{match.type12 | number : '1.2'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+  <div *ngFor="let item of offerList">
+  <div class="p-2 mb-1 bg-secondary text-white" >{{item.sport}}</div>
+  <table class="table table-borderless" >
+    <thead class="thead-light">
+      <th></th>
+      <th>1</th>
+      <th>X</th>
+      <th>2</th>
+      <th>1X</th>
+      <th>X2</th>
+      <th>12</th>
+    </thead>
+
+    <tbody>
+       <tr *ngFor="let match of item.matches">
+        <td>{{match.pair }}</td>
+        <td>{{match.type1 | number : '1.2'}}</td> 
+        <td>{{match.typeX | number : '1.2'}}</td> 
+        <td>{{match.type2 | number : '1.2'}}</td> 
+        <td>{{match.type1X | number : '1.2'}}</td> 
+        <td>{{match.type2X | number : '1.2'}}</td> 
+        <td>{{match.type12 | number : '1.2'}}</td>
+    </tr> 
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
