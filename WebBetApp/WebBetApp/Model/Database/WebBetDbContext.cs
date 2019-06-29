@@ -17,5 +17,7 @@ namespace WebBetApp.Model.Database
 
         public DbSet<Match> Matches { get; set; }
         public DbSet<Sport> Sports { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Wallet> Wallet { get; set; }
     }
 }

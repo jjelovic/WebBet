@@ -14,6 +14,16 @@ namespace WebBetApp.Model.Database.Testing
             {
                 InsertSports(db);
                 InsertMatches(db);
+
+                
+            }
+
+            if (!db.Wallet.Any())
+            {
+                 var initalBalance = new Wallet { Balance = 0 };
+                 db.Wallet.Add(initalBalance);
+
+                 db.SaveChanges();
             }
         }
 

@@ -9,5 +9,9 @@ namespace WebBetApp.Main
     public interface IWebBetQueries
     {
         IEnumerable<MatchOffer> GetMatchesGroupedBySport();
+
+        void PostDepositTransaction(WebWallet webWalletDeposit);
+
+        WebWallet GetBalance();
     }
 }
