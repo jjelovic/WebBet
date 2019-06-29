@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-webbet-app',
+  selector: 'webbet-app',
   templateUrl: './webbet-app.component.html',
   styles: []
 })
