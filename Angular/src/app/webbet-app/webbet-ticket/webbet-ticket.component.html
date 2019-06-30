@@ -1,3 +1,47 @@
-<p>
-  webbet-ticket works!
-</p>
+<form #form="ngForm" autocomplete="off" (submit)=onSubmit(form)>
+    <div>
+      <div class="p-2 mb-1 bg-success text-white" >Odigrani parovi</div>
+      <table class="table  table-responsive-md btn-table" >
+        <thead class="thead-light">
+        </thead>
+        <tbody *ngFor="let match of ticketService.ticketFormData.selectedMatches; let i= index">
+          <tr> 
+           <td>{{match.pair}}</td>
+           <td>{{match.quota}}</td>
+           <td>{{match.type}}</td>
+           <td class="text-right"><button (click)="onDelete(i)"class="btn btn-sm btn-outline-danger">x</button></td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="table  table-responsive-md btn-table" >
+        <thead class="thead-light">
+        </thead>
+        <tbody >
+          <tr class="p-2 mb-1 bg-success text-white">
+            <td >Ulog</td>
+            <td >
+                 <input   type="" name="stake" #stake="ngModel" [(ngModel)]="ticketService.ticketFormData.stake" id="stake" placeholder="Ulog" >
+            </td>
+            
+          </tr>
+           <tr class="p-2 mb-1 bg-success text-white">
+            <td >Ukupni koeficijent</td>
+            <td>
+                <input  type="number" name="totalMatchesCoeficient" #totalMatchesCoeficient="ngModel" [(ngModel)]="ticketService.ticketFormData.totalMatchesCoeficient" id="totalMatchesCoeficient" readonly >
+            </td>
+          </tr>
+          <tr class="p-2 mb-1 bg-success text-white">
+            <td >Mogući dobitak</td>
+            <td>
+                <input  type="number" name="possibleReturn" #possibleReturn="ngModel" [(ngModel)]="ticketService.ticketFormData.possibleReturn" id="possibleReturn" readonly >
+            </td>
+          </tr>
+         
+          <button type="button" class="btn btn-primary btn-lg btn-block">Spremi listić</button>
+        </tbody>
+      </table>
+    </div>
+  </form>

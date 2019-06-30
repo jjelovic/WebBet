@@ -33,11 +33,13 @@ export class WebbetWalletDepositComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-      this.validateForm(form.value);
+      // this.validateForm(form.value);
+
       this.service.postWalletDeposit(form.value).subscribe( res=> 
         {
           this.dialogRef.close();
           // this.router.navigate(['/webbetApp']);
+          this.service.getWalletBalance();
         },
           err => {
             console.log(err)

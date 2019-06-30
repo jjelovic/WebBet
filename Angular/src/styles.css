@@ -9,3 +9,19 @@ table{
      margin-right: 0px;
 }
 
+.btn-block {
+    display: block;
+    align-items: center;
+}
+.btn-lg {
+    padding: 0.5rem -2rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    width: 114%;
+}
+
+.form-control {
+    display: block;
+    width: 113%;
+}

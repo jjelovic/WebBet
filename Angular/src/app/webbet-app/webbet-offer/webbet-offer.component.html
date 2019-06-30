@@ -1,7 +1,7 @@
 <div>
       <div>
         <div class="p-2 mb-1 bg-secondary text-white" >Top ponuda</div>
-        <table class="table table-striped table-responsive-md btn-table" >
+        <table class="table  table-borderless" >
           <thead class="thead-light">
             <th></th>
             <th>1</th>
@@ -14,28 +14,17 @@
      
           <tbody *ngFor="let item of topOfferList">
              <tr *ngFor="let match of item.topOfferMatches">
-              <td>{{match.pair }}</td>
-              <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <td><mat-button-toggle value="{{match.type1 | number : '1.2'}}">{{match.type1 | number : '1.2'}}</mat-button-toggle></td>
-                <td><mat-button-toggle value="{{match.typeX | number : '1.2'}}">{{match.typeX | number : '1.2'}}</mat-button-toggle></td>
-                <td><mat-button-toggle value="{{match.type2 | number : '1.2'}}">{{match.type2 | number : '1.2'}}</mat-button-toggle></td>
-                <td><mat-button-toggle value="{{match.type1X | number : '1.2'}}">{{match.type1X | number : '1.2'}}</mat-button-toggle></td>
-                <td><mat-button-toggle value="{{match.typeX2 | number : '1.2'}}">{{match.typeX2 | number : '1.2'}}</mat-button-toggle></td>
-                <td><mat-button-toggle value="{{match.type12 | number : '1.2'}}">{{match.type12 | number : '1.2'}}</mat-button-toggle></td> 
-              </mat-button-toggle-group>-->
-              <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0"><td>{{match.type1 }}</button>
-              <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0"><td>{{match.typeX }}</button>
-              <!-- </td> 
-              <td>{{match.typeX | number : '1.2'}}</td> 
-              <td>{{match.type2 | number : '1.2'}}</td> 
-              <td>{{match.type1X | number : '1.2'}}</td> 
-              <td>{{match.typeX2 | number : '1.2'}}</td> 
-              <td>{{match.type12 | number : '1.2'}}</td>  -->
-          </tr>
+              <td >{{match.pair }}</td>
+              <td (click)="addMatchToTicket(match,match.type1,1)">  {{match.type1 | number : '1.2'}} </td> 
+              <td (click)="addMatchToTicket(match,match.typeX,X)">  {{match.typeX | number : '1.2'}} </td> 
+              <td (click)="addMatchToTicket(match,match.type2,2)">  {{match.type2 | number : '1.2'}} </td> 
+              <td (click)="addMatchToTicket(match,match.type1X,10)">{{match.type1X | number : '1.2'}}</td> 
+              <td (click)="addMatchToTicket(match,match.type1X,02)">{{match.typeX2 | number : '1.2'}}</td> 
+              <td (click)="addMatchToTicket(match,match.type1X,12)">{{match.type12 | number : '1.2'}}</td> 
+            </tr>
           </tbody>
         </table>
       </div>
-
 
   <div *ngFor="let item of offerList">
   <div class="p-2 mb-1 bg-secondary text-white" >{{item.sport}}</div>
@@ -52,17 +41,15 @@
 
     <tbody>
        <tr *ngFor="let match of item.matches">
-        <td>{{match.pair }}</td>
-        <td>{{match.type1 | number : '1.2'}}</td> 
-        <td>{{match.typeX | number : '1.2'}}</td> 
-        <td>{{match.type2 | number : '1.2'}}</td> 
-        <td>{{match.type1X | number : '1.2'}}</td> 
-        <td>{{match.typeX2 | number : '1.2'}}</td> 
-        <td>{{match.type12 | number : '1.2'}}</td>
+          <td >{{match.pair }}</td>
+          <td (click)="addMatchToTicket(match,match.type1,1)"> {{match.type1 | number : '1.2'}} </td> 
+          <td (click)="addMatchToTicket(match,match.typeX,0)">  {{match.typeX | number : '1.2'}} </td> 
+          <td (click)="addMatchToTicket(match,match.type2,2)">  {{match.type2 | number : '1.2'}} </td> 
+          <td (click)="addMatchToTicket(match,match.type1X,10)">{{match.type1X | number : '1.2'}}</td> 
+          <td (click)="addMatchToTicket(match,match.type1X,02)">{{match.typeX2 | number : '1.2'}}</td> 
+          <td (click)="addMatchToTicket(match,match.type1X,12)">{{match.type12 | number : '1.2'}}</td> 
     </tr> 
     </tbody>
   </table>
-
   </div>
-
 </div>

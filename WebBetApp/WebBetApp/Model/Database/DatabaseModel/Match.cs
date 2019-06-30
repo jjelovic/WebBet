@@ -36,6 +36,6 @@ namespace WebBetApp.Model.Database.DatabaseModel
         public bool IsPartOfTopOffer { get; set; }
         public int SportId { get; set; }
 
-        public Sport Sport { get; set; }
+        public virtual Sport Sport { get; set; }
     }
 }

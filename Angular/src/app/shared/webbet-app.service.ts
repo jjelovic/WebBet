@@ -10,7 +10,9 @@ import { WebbetWallet } from './webbet-wallet.model';
 })
 export class WebbetAppService {
 
-  formData : WebbetWallet;
+  walletFormData : WebbetWallet;
+  
+
   readonly rootURL = 'http://localhost:51157/api';
 
 
@@ -20,8 +22,8 @@ export class WebbetAppService {
     return this.http.get(this.rootURL + '/Matches');
   }
 
-  postWalletDeposit(formData:WebbetWallet){
-    return this.http.post(this.rootURL + '/Wallet', formData);
+  postWalletDeposit(walletFormData:WebbetWallet){
+    return this.http.post(this.rootURL + '/Wallet', walletFormData);
   }
 
   getWalletBalance():Observable<any> {
