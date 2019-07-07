@@ -12,7 +12,7 @@ namespace WebBetApp.Model.Database.DatabaseModel
     {
         public Sport()
         {
-            Matches = new Collection<Match>();
+            Matches = new HashSet<Match>();
         }
 
         [Key]
