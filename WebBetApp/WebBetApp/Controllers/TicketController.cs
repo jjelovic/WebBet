@@ -14,20 +14,26 @@ namespace WebBetApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MatchesController : ControllerBase
+    public class TicketController : ControllerBase
     {
-        private readonly IWebBetQueries webBetQuries;
+        private readonly IWebBetQueries webBetQueries;
 
-        public MatchesController(IWebBetQueries webBetQuries)
+        public TicketController(IWebBetQueries webBetQueries)
         {
-            this.webBetQuries = webBetQuries;
+            this.webBetQueries = webBetQueries;
         }
 
-        // GET: api/Matches
+        // GET: api/Ticket
         [HttpGet]
-        public IEnumerable<WebMatchOffer> GetMatchesForWebOffer()
+        public IEnumerable<WebTicket> GetTickets()
         {
-            return webBetQuries.GetMatchesGroupedBySport();
+            return webBetQueries.GetAllTickets();
+        }
+
+        [HttpPost]
+        public void PostTicket(WebTicket webTicket)
+        {
+            webBetQueries.PostWebTicketToDb(webTicket);
         }
     }
 }

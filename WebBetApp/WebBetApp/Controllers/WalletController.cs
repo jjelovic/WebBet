@@ -28,7 +28,7 @@ namespace WebBetApp.Controllers
         [HttpPost]
         public void PostDepositToWallet(WebWallet webWalletDeposit)
         {
-            webBetQueries.PostDepositTransaction(webWalletDeposit);
+            webBetQueries.MakeTransaction(webWalletDeposit);
         }
     }
 }
