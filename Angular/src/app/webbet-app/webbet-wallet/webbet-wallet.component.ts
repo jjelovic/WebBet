@@ -1,8 +1,10 @@
+import { WebbetTicketService } from './../../shared/webbet-ticket.service';
 import { WebbetWallet } from 'src/app/shared/webbet-wallet.model';
 import { WebbetWalletDepositComponent } from './webbet-wallet-deposit.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WebbetAppService } from 'src/app/shared/webbet-app.service';
+
 
 @Component({
   selector: 'app-webbet-wallet',
@@ -11,13 +13,12 @@ import { WebbetAppService } from 'src/app/shared/webbet-app.service';
 })
 export class WebbetWalletComponent implements OnInit {
 
-  wallet: WebbetWallet;
 
-  constructor(private dialog:MatDialog ,private service: WebbetAppService) { }
+  constructor(private dialog:MatDialog ,private service: WebbetAppService, private ticketService : WebbetTicketService) { }
 
   ngOnInit() {
     this.service.getWalletBalance().subscribe( res => {
-      this.wallet = res as WebbetWallet;
+      this.ticketService.wallet = res as WebbetWallet;
     });
   }
 
@@ -26,6 +27,8 @@ export class WebbetWalletComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = "40%";
-    this.dialog.open(WebbetWalletDepositComponent,dialogConfig);
+    const openDialog = this.dialog.open(WebbetWalletDepositComponent,dialogConfig);
+   
+    openDialog.afterClosed().subscribe(() => this.ticketService.updateWallateBalance());
   }
 }

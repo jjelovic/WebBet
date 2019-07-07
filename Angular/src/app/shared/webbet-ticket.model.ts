@@ -3,30 +3,34 @@ import { element } from 'protractor';
 import { WebbetTicketMatch } from './webbet-ticket-match.model';
 export class WebbetTicket {
 
+    ticketCode: string;
     stake : number;
-    stakeWithManipulatingCosts: number;
+    stakeWithManipulationCosts: number;
     possibleReturn: number;
-    selectedMatches: WebbetTicketMatch[];
-    totalMatchesCoeficient: number;
+    ticketMatches: WebbetTicketMatch[];
+    totalMatchesCoefficient: number;
+    
 
-    constructor(stake, stakeWithManipulatingCosts, possibleReturn, selectedMatches, totalMatchesCoeficinet){
+    constructor(stake,ticketCode, stakeWithManipulationCosts, possibleReturn, ticketMatches, totalMatchesCoefficient){
         
         let tempMatchArray = [];
 
         this.stake = stake;
-        this.stakeWithManipulatingCosts = stakeWithManipulatingCosts;
+        this.ticketCode = ticketCode,
+        this.stakeWithManipulationCosts = stakeWithManipulationCosts;
         this.possibleReturn = possibleReturn;
-        this.totalMatchesCoeficient = totalMatchesCoeficinet;
+        this.totalMatchesCoefficient = totalMatchesCoefficient;
         
-        selectedMatches.array.forEach(function(element){
+        ticketMatches.array.forEach(function(element){
             tempMatchArray.push( new WebbetTicketMatch(
                 element.pair,
                 element.id, 
                 element.type,
-                element.quota
+                element.quota,
+                element.selectedInTO
             ));
         })
         
-        this.selectedMatches = tempMatchArray;
+        this.ticketMatches = tempMatchArray;
     }
 }

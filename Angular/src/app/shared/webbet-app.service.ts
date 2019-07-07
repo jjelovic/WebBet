@@ -1,3 +1,4 @@
+import { WebbetTicket } from './webbet-ticket.model';
 import { WebbetMatches } from './webbet-matches.model';
 import { WebbetOffer } from './webbet-offer.model';
 import { Injectable } from '@angular/core';
@@ -5,13 +6,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { WebbetWallet } from './webbet-wallet.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class WebbetAppService {
 
   walletFormData : WebbetWallet;
-  
 
   readonly rootURL = 'http://localhost:51157/api';
 
@@ -28,5 +29,13 @@ export class WebbetAppService {
 
   getWalletBalance():Observable<any> {
     return this.http.get(this.rootURL + '/Wallet');
+  }
+
+  getAllTickets():Observable<any>{
+    return this.http.get(this.rootURL + '/Ticket');
+  }
+
+  postWebbetTicket(ticketFormData: WebbetTicket){
+    return this.http.post(this.rootURL + '/Ticket', ticketFormData);
   }
 }

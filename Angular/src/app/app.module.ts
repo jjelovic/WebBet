@@ -15,6 +15,8 @@ import { WebbetAppService } from './shared/webbet-app.service';
 import { WebbetWalletComponent } from './webbet-app/webbet-wallet/webbet-wallet.component';
 import { WebbetWalletDepositComponent } from './webbet-app/webbet-wallet/webbet-wallet-deposit.component';
 import { MatButtonToggleModule } from '@angular/material';
+import { WebbetTicketListComponent } from './webbet-app/webbet-ticket/webbet-ticket-list.component';
+import { WebbetTicketPreviewComponent } from './webbet-app/webbet-ticket/webbet-ticket-preview.component';
 
 
 
@@ -25,7 +27,9 @@ import { MatButtonToggleModule } from '@angular/material';
     WebbetOfferComponent,
     WebbetTicketComponent,
     WebbetWalletComponent,
-    WebbetWalletDepositComponent
+    WebbetWalletDepositComponent,
+    WebbetTicketListComponent,
+    WebbetTicketPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ import { MatButtonToggleModule } from '@angular/material';
     MatDialogModule,
     MatButtonToggleModule
   ],
-  entryComponents:[WebbetWalletDepositComponent],
+  entryComponents:[WebbetWalletDepositComponent, WebbetTicketListComponent],
   providers: [WebbetAppService],
   bootstrap: [AppComponent]
 })

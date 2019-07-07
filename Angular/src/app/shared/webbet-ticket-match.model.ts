@@ -4,11 +4,13 @@ export class WebbetTicketMatch {
     id:number;
     type: string;
     quota: number;
+    selectedInTO: boolean;
     
-    constructor(pair, id,type, quota){
-        this.pair = pair;
+    constructor(pair, id,type, quota, selectedInTO){
         this.id = id;
+        this.pair = pair;
         this.type = type;
         this.quota = quota;
+        this.selectedInTO = selectedInTO;
     }
 }

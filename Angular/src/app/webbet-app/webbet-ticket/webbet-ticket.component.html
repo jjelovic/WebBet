@@ -1,15 +1,22 @@
+
 <form #form="ngForm" autocomplete="off" (submit)=onSubmit(form)>
-    <div>
+  
+    <div> 
       <div class="p-2 mb-1 bg-success text-white" >Odigrani parovi</div>
-      <table class="table  table-responsive-md btn-table" >
+
+    
+      <table  class="table  table-responsive-md btn-table" >
         <thead class="thead-light">
         </thead>
-        <tbody *ngFor="let match of ticketService.ticketFormData.selectedMatches; let i= index">
+         <span *ngIf="ticketService.ticketFormData.ticketMatches.length === 0">Nema odigranih parova</span>
+        <tbody *ngFor="let match of ticketService.ticketFormData.ticketMatches; let i= index">
+          
           <tr> 
-           <td>{{match.pair}}</td>
-           <td>{{match.quota}}</td>
+           <td *ngIf="match.selectedInTO else template">{{'TP ' + match.pair}}</td> <ng-template #template><td>{{match.pair}}</td></ng-template>
+           <!-- <td>{{match.pair}}</td>  -->
+           <td>{{match.quota | number : '1.2-2'}}</td>
            <td>{{match.type}}</td>
-           <td class="text-right"><button (click)="onDelete(i)"class="btn btn-sm btn-outline-danger">x</button></td>
+           <td class="text-right"><button type="button"  (click)="deletePair(match)"class="btn btn-sm btn-outline-danger">x</button></td>
         </tr>
 
         </tbody>
@@ -21,26 +28,59 @@
         </thead>
         <tbody >
           <tr class="p-2 mb-1 bg-success text-white">
-            <td >Ulog</td>
-            <td >
-                 <input   type="" name="stake" #stake="ngModel" [(ngModel)]="ticketService.ticketFormData.stake" id="stake" placeholder="Ulog" >
+            <td *ngIf="ticketService.ticketFormData.stakeWithManipulationCosts !== 0 else costsTemplate">Ulog -{{ticketService.ticketFormData.stake - ticketService.ticketFormData.stakeWithManipulationCosts | number : '1.2'}} kn (5% mt) = {{ticketService.ticketFormData.stakeWithManipulationCosts}} kn
             </td>
-            
+            <ng-template #costsTemplate><td>Ulog</td></ng-template>
+            <td >
+                 <input  (input)="updateTicket()" type="number" min="2" name="stake" #stake="ngModel" [(ngModel)]="ticketService.ticketFormData.stake" id="stake" placeholder="Ulog" >
+            </td>
           </tr>
-           <tr class="p-2 mb-1 bg-success text-white">
+
+            <tr class="p-2 mb-1 bg-success text-white">
             <td >Ukupni koeficijent</td>
             <td>
-                <input  type="number" name="totalMatchesCoeficient" #totalMatchesCoeficient="ngModel" [(ngModel)]="ticketService.ticketFormData.totalMatchesCoeficient" id="totalMatchesCoeficient" readonly >
+                <input  type="number" name="totalMatchesCoefficient" #totalMatchesCoeficient="ngModel" [(ngModel)]="ticketService.ticketFormData.totalMatchesCoefficient" id="totalMatchesCoefficient" readonly >
             </td>
           </tr>
           <tr class="p-2 mb-1 bg-success text-white">
-            <td >Mogući dobitak</td>
+            <td >Mogući dobitak </td>
             <td>
                 <input  type="number" name="possibleReturn" #possibleReturn="ngModel" [(ngModel)]="ticketService.ticketFormData.possibleReturn" id="possibleReturn" readonly >
             </td>
           </tr>
-         
-          <button type="button" class="btn btn-primary btn-lg btn-block">Spremi listić</button>
+         <br>
+         <div class="validation">
+          <span *ngIf="ticketService.ticketFormData.stake < 2" >
+             <i>Pogrešan unos uloga</i>  <br>
+            </span>
+          <span *ngIf="ticketService.topOfferPairPlus5" >
+            <i>Uz par iz top ponude morate odabrati još 5 parova iz redovne ponude</i> <br>
+        </span>
+        <span *ngIf="ticketService.ticketFormData.stake > ticketService.wallet.amount" >
+          <i>Nemate dovoljno novca u novčaniku</i> <br>
+      </span>
+      <span *ngIf="ticketService.isSecondTopOfferMatchSelected" >
+        <i>Ne možete kombinirati parove iz top ponude</i> <br>
+    </span>
+        <br>
+        </div>
+          <div class="btn-group">
+           <button type="button" class="btn btn-lg btn-primary  btn-lg btn-block" (click)="saveTicket(ticketService.ticketFormData)" 
+                  [disabled]="ticketService.ticketFormData.ticketMatches.length === 0 ||
+                              ticketService.ticketFormData.stake  < 2 || 
+                              ticketService.topOfferPairPlus5 || 
+                              ticketService.ticketFormData.stake > ticketService.wallet.amount ||
+                              ticketService.isSecondTopOfferMatchSelected" >
+                  Spremi listić
+                </button>
+          <button type="button" class="btn btn-secondary " (click)="openTicketList()"><i class="fa fa-ticket-alt" ngbPopover="Popover"></i>
+            </button>
+            <br>
+          </div>
+          <br>
+          
+          <br>
+            
         </tbody>
       </table>
     </div>

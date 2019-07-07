@@ -9,6 +9,7 @@ import { WebbetMatches } from 'src/app/shared/webbet-matches.model';
 import { element } from '@angular/core/src/render3/instructions';
 import { Ee } from '@angular/core/src/render3';
 import { pairs } from 'rxjs';
+import { BetTypeEnum } from 'src/app/enums/betTypes';
 
 @Component({
   selector: 'app-webbet-offer',
@@ -16,6 +17,7 @@ import { pairs } from 'rxjs';
   styles: []
 })
 export class WebbetOfferComponent implements OnInit {
+
   offerList: WebbetMatches[];
   topOfferList: WebbetMatches[];
   
@@ -23,7 +25,15 @@ export class WebbetOfferComponent implements OnInit {
   ticket: WebbetTicket;
   ticketMatch:WebbetTicketMatch;
   matchArray = [];
+  topOfferMatchesLenght: number;
 
+  betTypeEnum = BetTypeEnum;
+  temp: number = 0;
+
+  ticketHasTopOfferBet: boolean;
+  isSecondTopOfferMatchSelected: boolean;
+  tempHasSpecialOfferPair = false; 
+  
   constructor(private service: WebbetAppService,
               private ticketService: WebbetTicketService) { }
 
@@ -35,61 +45,61 @@ export class WebbetOfferComponent implements OnInit {
                           element.matches
                           .some((subElement) => subElement.isPartOfTopOffer))
                           .map(element => {
-                          return Object.assign( {topOfferMatches: element.matches.filter(subElement => subElement.isPartOfTopOffer ) })
+                          return Object.assign( {topOfferMatches: element.matches.filter(subElement => subElement.isPartOfTopOffer )})
         });
-
-        // console.log(this.topOfferList);
       });
   }
 
-  addMatchToTicket(match: WebbetOffer, quota:number, type:string ){
-     console.log("kvota i tip: " +  quota, type)
-
+  addMatchToTicket(match: WebbetOffer, quota:number, type : string, selectedInTO: boolean ){
     this.ticketMatch = {
       pair:  match.pair,
-      quota: quota,
+      quota: selectedInTO? quota * 1.05 : quota,
       type:  type,
-      id:    match.id
+      id:    match.id,
+      selectedInTO: selectedInTO
     }
 
-    let tempPair = this.ticketService.ticketFormData.selectedMatches.filter(el=> el.id == this.ticketMatch.id)[0];
+    this.ticketHasTopOfferBet = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.selectedInTO).length > 0;
+    let existingPair = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.id == this.ticketMatch.id)[0];
+    
 
+     if(typeof existingPair !== "undefined" ){
+      
+      //Same match selected but different qouta
+      if(existingPair.quota !== this.ticketMatch.quota || this.ticketMatch.selectedInTO){
+          
 
-    if(!tempPair) {
-       
-      if(this.ticketMatch.quota !== null ) {
-        this.ticketService.ticketFormData.selectedMatches.push(this.ticketMatch);
-        this.ticketService.ticketFormData.totalMatchesCoeficient = this.getTotalCoeficient();
-        this.ticketService.ticketFormData.possibleReturn = this.getPossibleReturn();
-        this.ticketService.ticketFormData.stakeWithManipulatingCosts = this.getStakeWithManCosts();
-      }
-    }
-    console.log("Man troškovi:" + this.ticketService.ticketFormData.stakeWithManipulatingCosts);
-    console.log(this.ticketService.ticketFormData);
-    console.log(this.ticketService.ticketFormData.totalMatchesCoeficient)
+          let typeToSwitchPairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.id == this.ticketMatch.id);
+          this.ticketService.ticketFormData.ticketMatches[typeToSwitchPairIndex] =this.ticketMatch;
+    
+          //Update ticket
+           this.ticketService.updateTotalCoefficient();
+           this.ticketService.updatePossibleReturn();
+
+           this.ticketService.validateTicketForm();
+
+           this.ticketService.isSecondTopOfferMatchSelected = false;
+           }
+        }
+        else {
+          //
+           if(this.ticketMatch.quota !== null ) {
+
+              //Cannot combine top offer matches, only one allowed
+               if(!(this.ticketMatch.selectedInTO && this.ticketHasTopOfferBet)){
+
+               this.ticketService.ticketFormData.ticketMatches.push(this.ticketMatch);
+               this.ticketService.updateTotalCoefficient();
+               this.ticketService.updateStakeWithMtCosts();
+               this.ticketService.updatePossibleReturn();
+
+               this.ticketService.validateTicketForm();
+               this.ticketService.isSecondTopOfferMatchSelected = false;
+            }
+            else this.ticketService.isSecondTopOfferMatchSelected = true;
+
+            this.ticketService.validateTicketForm();
+          }
+        }
   }
-
-
-
-  getTotalCoeficient(){
-     let totalCoeficient =  this.ticketService.ticketFormData.selectedMatches
-     .reduce(function(acc,qu) { return acc * qu.quota; }, 1); 
-
-     return parseFloat(totalCoeficient.toFixed(2));
-  }
-
-  getPossibleReturn(){
-    let possibleReturn = this.ticketService.ticketFormData.stakeWithManipulatingCosts * this.ticketService.ticketFormData.totalMatchesCoeficient;
-
-    return parseFloat(possibleReturn.toFixed(2));
-  }
-
-  getStakeWithManCosts(){
-    return (this.ticketService.ticketFormData.stake - (this.ticketService.ticketFormData.stake * 0.05))
-  }
-
-  onDelete(index: number){
-    this.ticketService.ticketFormData.selectedMatches.splice(index,1);
-  }
-
 }
