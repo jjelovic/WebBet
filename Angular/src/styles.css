@@ -25,3 +25,41 @@ table{
     display: block;
     width: 113%;
 }
+
+.sidebar {
+    width: 25%;
+    height: 100vh; 
+    min-height: 200px;
+    overflow: auto;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5%;
+  }
+  
+  .validation {
+    width: 170%;
+    /* background: #dfdfdf; */
+}
+.validation span {
+    color:red; 
+    text-align: center
+}
+
+.listItem .firstRow                                 { display: block; padding: 1em 1.3em 0.1em 1.3em;  }
+.listItem                                           { position: relative; height: 5.2em; border-bottom: 1px solid #e0e0e0; cursor: pointer; }
+.listItem:hover                                     { background-color: rgba(0,0,0,0.04); }
+.listItem.ui-active                                 { background-color: rgba(0,0,0,0.08); cursor: default; }
+
+
+.listWrapper  { position: absolute; top: 6em; right: 0; bottom: 0; left: 0; overflow: auto; }
+.listWrapper .list           { padding: 0 1.4em; }
+
+.listItem .firstRow .Wrapper                  { opacity: 0.8; }
+.listItem .firstRow .Wrapper .separator       { font-size: 1.4em; }
+.listItem .firstRow .Wrapper .numberOfMatches { font-size: 1.3em; }
+.listItem .firstRow .Wrapper .ticketCode      { font-size: 1.3em; }
+.listItem .firstRow .details                      { overflow: hidden; white-space: nowrap; 
+                                              -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  }
+
+.listItem .secondRow                                { display: block; padding: 0 1.3em 0 1.3em; opacity: 0.8; }
+.listItem .secondRow .details                         { overflow: hidden; white-space: nowrap; }

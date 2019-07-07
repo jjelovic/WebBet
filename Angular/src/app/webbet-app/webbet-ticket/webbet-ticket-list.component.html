@@ -1,0 +1,48 @@
+
+  <div>
+      <div class="modal-header">
+
+            <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close()">
+              <span aria-hidden="">×</span>
+            </button>
+        </div>
+<div class="row"> 
+
+  <div class="col-md-7">
+    <div class="">
+    <ul class="list">
+        <li class="listItem" *ngFor="let ticket of ticketList" (click)="previewMatches(ticket.ticketMatches)"> 
+            <div class="firstRow clearfix">
+
+             
+                    <span class="Wrapper"> 
+                      <span class="ticketCode"> 
+                        Kod listića: {{ticket.ticketCode}}
+                       </span>
+                    </span>
+                            
+                    <span class="Wrapper">
+                        <span class="separator">|</span>
+                        <span class="numberOfMatches"> 
+                            Ukupno parova: {{ticket.ticketMatches.length}}
+                        </span>
+                    </span>
+                
+                        
+            </div>
+            <div class="secondRow clearfix">
+                <div class="details"> <span> 
+                  Ulog: {{ticket.stake}} kn <b>|</b>
+                  Ukupni koeficijent: {{ticket.totalMatchesCoefficient | number :'1.2'}} <b>|</b>
+                  Mogući dobitak:<b> {{ticket.possibleReturn | number :'1.2'}} kn</b>
+                  </span> </div>
+            </div>
+        </li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-5">
+    <app-webbet-ticket-preview class=""></app-webbet-ticket-preview>
+</div>
+
+</div>
