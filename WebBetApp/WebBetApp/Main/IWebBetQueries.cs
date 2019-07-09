@@ -18,5 +18,7 @@ namespace WebBetApp.Main
         WebWallet GetBalance();
 
         void PostWebTicketToDb(WebTicket webTicket);
+
+        void DeleteTicketFromDb(string ticketCode);
     }
 }

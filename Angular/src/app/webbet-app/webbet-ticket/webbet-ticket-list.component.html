@@ -1,23 +1,22 @@
 
   <div>
       <div class="modal-header">
-
             <button type="button" class="close pull-right" aria-label="Close" (click)="dialogRef.close()">
               <span aria-hidden="">×</span>
             </button>
         </div>
 <div class="row"> 
-
   <div class="col-md-7">
     <div class="">
-    <ul class="list">
-        <li class="listItem" *ngFor="let ticket of ticketList" (click)="previewMatches(ticket.ticketMatches)"> 
+      <ul class="list">
+          <span *ngIf="ticketList.length === 0">Nema spremljenih listića</span>
+        <li class="listItem" *ngFor="let ticket of ticketList" (click)="previewMatches(ticket.ticketMatches, ticket.ticketCode)"
+            [class.selected]=" ticket.ticketCode === ticketService.acitveTicketCode"> 
             <div class="firstRow clearfix">
 
-             
                     <span class="Wrapper"> 
                       <span class="ticketCode"> 
-                        Kod listića: {{ticket.ticketCode}}
+                        Listić kȏd: {{ticket.ticketCode}}
                        </span>
                     </span>
                             
@@ -27,15 +26,15 @@
                             Ukupno parova: {{ticket.ticketMatches.length}}
                         </span>
                     </span>
-                
-                        
             </div>
             <div class="secondRow clearfix">
                 <div class="details"> <span> 
                   Ulog: {{ticket.stake}} kn <b>|</b>
-                  Ukupni koeficijent: {{ticket.totalMatchesCoefficient | number :'1.2'}} <b>|</b>
+                  Uk. koeficijent: {{ticket.totalMatchesCoefficient | number :'1.2'}} <b>|</b>
                   Mogući dobitak:<b> {{ticket.possibleReturn | number :'1.2'}} kn</b>
-                  </span> </div>
+                  </span>
+                  <span class="delete btn btn-sm btn-outline-danger" (click)="deleteTicket(ticket.ticketCode)">x</span> 
+                </div>
             </div>
         </li>
     </ul>

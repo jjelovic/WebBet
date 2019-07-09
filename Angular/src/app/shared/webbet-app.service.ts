@@ -1,4 +1,5 @@
-import { WebbetTicket } from './webbet-ticket.model';
+import { WebbetTicket } from 'src/app/shared/webbet-ticket.model';
+
 import { WebbetMatches } from './webbet-matches.model';
 import { WebbetOffer } from './webbet-offer.model';
 import { Injectable } from '@angular/core';
@@ -37,5 +38,9 @@ export class WebbetAppService {
 
   postWebbetTicket(ticketFormData: WebbetTicket){
     return this.http.post(this.rootURL + '/Ticket', ticketFormData);
+  }
+
+  deleteWebbetTicket(webbetTicketCode: string){
+    return this.http.delete(this.rootURL + '/Ticket/' + webbetTicketCode);
   }
 }

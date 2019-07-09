@@ -9,40 +9,17 @@ table{
      margin-right: 0px;
 }
 
-.btn-block {
-    display: block;
-    align-items: center;
+.btn-block {display: block;align-items: center;
 }
-.btn-lg {
-    padding: 0.5rem -2rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem;
-    width: 114%;
+.btn-lg { padding: 0.5rem -2rem;font-size: 1.25rem;line-height: 1.5; border-radius: .3rem; width: 114%;
 }
 
-.form-control {
-    display: block;
-    width: 113%;
-}
+.form-control {display: block; width: 113%; }
 
-.sidebar {
-    width: 25%;
-    height: 100vh; 
-    min-height: 200px;
-    overflow: auto;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 5%;
-  }
+.sidebar { width: 25%; height: 100vh; min-height: 200px; overflow: auto; position: -webkit-sticky; position: sticky; top: 5%; }
   
-  .validation {
-    width: 170%;
-    /* background: #dfdfdf; */
-}
-.validation span {
-    color:red; 
-    text-align: center
+  .validation {  width: 170%; }
+.validation span { color:red;  text-align: center
 }
 
 .listItem .firstRow                                 { display: block; padding: 1em 1.3em 0.1em 1.3em;  }
@@ -55,11 +32,21 @@ table{
 .listWrapper .list           { padding: 0 1.4em; }
 
 .listItem .firstRow .Wrapper                  { opacity: 0.8; }
-.listItem .firstRow .Wrapper .separator       { font-size: 1.4em; }
-.listItem .firstRow .Wrapper .numberOfMatches { font-size: 1.3em; }
-.listItem .firstRow .Wrapper .ticketCode      { font-size: 1.3em; }
+.listItem .firstRow .Wrapper .separator       { font-size: 19px; }
+.listItem .firstRow .Wrapper .numberOfMatches { font-size: 19px; }
+.listItem .firstRow .Wrapper .ticketCode      { font-size: 19px; }
 .listItem .firstRow .details                      { overflow: hidden; white-space: nowrap; 
                                               -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  }
 
-.listItem .secondRow                                { display: block; padding: 0 1.3em 0 1.3em; opacity: 0.8; }
-.listItem .secondRow .details                         { overflow: hidden; white-space: nowrap; }
+.listItem.selected                           { background-color: rgba(0,0,0,0.08); cursor: default; }
+
+
+.listItem .secondRow                         { display: block; padding: 0 1.3em 0 1.3em; opacity: 0.8; }
+.listItem .secondRow .details                { overflow: hidden; white-space: nowrap; }
+.listItem .secondRow .details .delete        { float: right;}
+
+
+/* .matchPreview .matchPreviewTableBody .row{  overflow: hidden; white-space: nowrap; 
+    -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis; 
+
+} */

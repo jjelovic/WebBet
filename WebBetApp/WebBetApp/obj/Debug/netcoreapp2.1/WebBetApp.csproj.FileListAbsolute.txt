@@ -11,12 +11,10 @@ D:\WebBet\WebBetApp - Copy\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.AssemblyI
 D:\WebBet\WebBetApp - Copy\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.RazorTargetAssemblyInfo.cache
 D:\WebBet\WebBetApp - Copy\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.dll
 D:\WebBet\WebBetApp - Copy\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.pdb
+D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.dll
 D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.deps.json
 D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.runtimeconfig.json
 D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.runtimeconfig.dev.json
-D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.dll
-D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.pdb
-D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.csprojAssemblyReference.cache
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.csproj.CoreCompileInputs.cache
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.RazorAssemblyInfo.cache
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.RazorAssemblyInfo.cs
@@ -25,3 +23,5 @@ D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.AssemblyInfo.cs
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.RazorTargetAssemblyInfo.cache
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.dll
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.pdb
+D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.csprojAssemblyReference.cache
+D:\WebBet\WebBetApp\WebBetApp\bin\Debug\netcoreapp2.1\WebBetApp.pdb

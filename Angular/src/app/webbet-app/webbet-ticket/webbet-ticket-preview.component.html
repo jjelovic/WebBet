@@ -1,3 +1,17 @@
-<p>
-  webbet-ticket-preview works!
-</p>
+
+
+<table class="table table-responsive-md btn-table ">
+  <tbody class="">
+    <tr class="" *ngFor="let match of ticketService.ticketMatchesForPreview">
+        <td>
+            {{match.pair}}  
+        </td>
+        <td>
+            {{match.type}}
+        </td>
+        <td>
+            {{match.quota | number : '1.2-2'}}
+        </td>
+    </tr>
+  </tbody>
+</table>

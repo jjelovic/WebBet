@@ -1,3 +1,4 @@
+import { WebbetTicketMatch } from './webbet-ticket-match.model';
 import { WebbetAppService } from './webbet-app.service';
 import { WebbetWallet } from 'src/app/shared/webbet-wallet.model';
 import { WebbetTicket } from './webbet-ticket.model';
@@ -18,7 +19,11 @@ export class WebbetTicketService {
   isSecondTopOfferMatchSelected: boolean;
   topOfferPairPlus5: boolean;
   invalidStake: boolean;
-  stakeGreaherThenWalletAmount: boolean;
+  stakeGreatherThenWalletAmount: boolean;
+
+  ticketMatches : WebbetTicketMatch[];
+  ticketMatchesForPreview: WebbetTicketMatch[];
+  acitveTicketCode: string;
 
   updateTotalCoefficient(){
     let totalCoefficient =  this.ticketFormData.ticketMatches.reduce(function(acc,qu) { return acc * qu.quota; }, 1); 
@@ -42,15 +47,13 @@ export class WebbetTicketService {
   });
  }
 
+
 validateTicketForm(){
 
   this.topOfferPairPlus5 =  (this.ticketFormData.ticketMatches.filter(el=> el.selectedInTO).length !== 0
                                 && this.ticketFormData.ticketMatches.length < 6); 
 
-  this.stakeGreaherThenWalletAmount = this.ticketFormData.stake > this.wallet.amount;
-
-
+  this.stakeGreatherThenWalletAmount = this.ticketFormData.stake > this.wallet.amount;
 }
-
 
 }

@@ -28,7 +28,6 @@ export class WebbetOfferComponent implements OnInit {
   topOfferMatchesLenght: number;
 
   betTypeEnum = BetTypeEnum;
-  temp: number = 0;
 
   ticketHasTopOfferBet: boolean;
   isSecondTopOfferMatchSelected: boolean;
@@ -82,7 +81,7 @@ export class WebbetOfferComponent implements OnInit {
            }
         }
         else {
-          //
+     
            if(this.ticketMatch.quota !== null ) {
 
               //Cannot combine top offer matches, only one allowed

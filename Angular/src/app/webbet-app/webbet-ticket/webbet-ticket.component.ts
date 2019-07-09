@@ -55,7 +55,7 @@ export class WebbetTicketComponent implements OnInit {
       dialogTicketConfig.autoFocus = true;
       dialogTicketConfig.disableClose = true;
       dialogTicketConfig.height = '100mv';
-      dialogTicketConfig.width = "90%";
+      dialogTicketConfig.width = "95%";
       const openTicketDialog = this.dialog.open(WebbetTicketListComponent,dialogTicketConfig);
   }
 

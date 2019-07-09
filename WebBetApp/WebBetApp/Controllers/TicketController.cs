@@ -35,5 +35,11 @@ namespace WebBetApp.Controllers
         {
             webBetQueries.PostWebTicketToDb(webTicket);
         }
+
+        [HttpDelete("{ticketCode}")]
+        public void DeleteTicket(string ticketCode)
+        {
+            webBetQueries.DeleteTicketFromDb(ticketCode);
+        }
     }
 }

@@ -89,6 +89,21 @@ namespace WebBetApp.Main
             }
         }
 
+        public void DeleteTicketFromDb(string ticketCode)
+        {
+            var ticket = context.Tickets.Include(tm => tm.TicketMatches)
+                                        .SingleOrDefault(t => t.TicketCode == ticketCode);
+
+            foreach(var ticketMatch in ticket.TicketMatches)
+            {
+                context.TicketMatches.Remove(ticketMatch);
+            }
+
+            context.Tickets.Remove(ticket);
+
+            context.SaveChanges();
+        } 
+
         public WebWallet GetBalance()
         {
             var balance = context.Wallet.Select(w => w.Balance).Sum();
