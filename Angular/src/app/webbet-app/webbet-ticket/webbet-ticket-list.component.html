@@ -9,7 +9,7 @@
   <div class="col-md-7">
     <div class="">
       <ul class="list">
-          <span *ngIf="ticketList.length === 0">Nema spremljenih listića</span>
+          <!-- <span *ngIf="ticketList.length === 0">Nema spremljenih listića</span> -->
         <li class="listItem" *ngFor="let ticket of ticketList" (click)="previewMatches(ticket.ticketMatches, ticket.ticketCode)"
             [class.selected]=" ticket.ticketCode === ticketService.acitveTicketCode"> 
             <div class="firstRow clearfix">

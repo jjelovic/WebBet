@@ -11,8 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebBetApp.Main;
+using WebBetApp.Main.Validation;
 using WebBetApp.Model.Database;
 using WebBetApp.Model.Database.Testing;
+using WebBetApp.Model.ViewModels;
 
 namespace WebBetApp
 {
@@ -31,6 +33,7 @@ namespace WebBetApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
+            services.AddScoped(typeof(Validation<TypeOfObjectToValidate>), typeof(WalletValidation));
             services.AddDbContext<WebBetDbContext>(options =>
                                                    options.UseSqlServer(Configuration.GetConnectionString("WebBetDbContext")));
 
@@ -56,7 +59,8 @@ namespace WebBetApp
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<WebBetDbContext>();
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
+                context.Database.Migrate();
 
                 //Fill with test data
                 TestDataFactory.Fill(context);

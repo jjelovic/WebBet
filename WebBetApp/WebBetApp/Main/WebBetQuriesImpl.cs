@@ -7,16 +7,19 @@ using WebBetApp.Model.Database;
 using WebBetApp.Model.Database.DatabaseModel;
 using WebBetApp.Model.ViewModels;
 using WebBetApp.Helper;
+using WebBetApp.Main.Validation;
 
 namespace WebBetApp.Main
 {
     public class WebBetQuriesImpl : IWebBetQueries
     {
         private readonly WebBetDbContext context;
+        private readonly WalletValidation walletValidation;
 
-        public WebBetQuriesImpl(WebBetDbContext context)
+        public WebBetQuriesImpl( WebBetDbContext context, WalletValidation walletValidation)
         {
             this.context = context;
+            this.walletValidation = walletValidation;
         }
 
         public IEnumerable<WebMatchOffer> GetMatchesGroupedBySport()
@@ -52,6 +55,8 @@ namespace WebBetApp.Main
 
         public void PostWebTicketToDb(WebTicket webTicket)
         {
+       
+            walletValidation.Validate(webTicket);
             try
             {
                 var ticket = new Ticket
@@ -114,6 +119,7 @@ namespace WebBetApp.Main
 
         public void MakeTransaction(WebWallet webWalletDeposit)
         {
+           
             try
             {
                 var transaction = new Transaction

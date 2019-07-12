@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { WebbetAppComponent } from './webbet-app/webbet-app.component';
@@ -37,7 +37,8 @@ import { WebbetTicketPreviewComponent } from './webbet-app/webbet-ticket/webbet-
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    ToastrModule.forRoot()
   ],
   entryComponents:[WebbetWalletDepositComponent, WebbetTicketListComponent],
   providers: [WebbetAppService],

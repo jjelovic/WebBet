@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebbetTicket } from 'src/app/shared/webbet-ticket.model';
 import { WebbetTicketService } from 'src/app/shared/webbet-ticket.service';
 import { WebbetTicketListComponent } from './webbet-ticket-list.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-webbet-ticket',
@@ -16,7 +17,8 @@ export class WebbetTicketComponent implements OnInit {
 
   constructor(private service:WebbetAppService,
      private ticketService: WebbetTicketService,
-     private dialog: MatDialog) { }
+     private dialog: MatDialog,
+     private toastr: ToastrService) { }
 
   ngOnInit() {
 
@@ -46,13 +48,14 @@ export class WebbetTicketComponent implements OnInit {
     this.service.postWebbetTicket(ticket).subscribe( res => {
       this.resetForm();
       this.ticketService.updateWallateBalance();
+      this.toastr.success('Listić uspješno spremljen')
     })
   }
 
   openTicketList(){
         
       const dialogTicketConfig = new MatDialogConfig();
-      dialogTicketConfig.autoFocus = true;
+      dialogTicketConfig.autoFocus = false;
       dialogTicketConfig.disableClose = true;
       dialogTicketConfig.height = '100mv';
       dialogTicketConfig.width = "95%";
