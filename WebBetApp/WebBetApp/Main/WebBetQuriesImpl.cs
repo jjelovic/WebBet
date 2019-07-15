@@ -9,17 +9,16 @@ using WebBetApp.Model.ViewModels;
 using WebBetApp.Helper;
 using WebBetApp.Main.Validation;
 
+
 namespace WebBetApp.Main
 {
     public class WebBetQuriesImpl : IWebBetQueries
     {
         private readonly WebBetDbContext context;
-        private readonly WalletValidation walletValidation;
 
-        public WebBetQuriesImpl( WebBetDbContext context, WalletValidation walletValidation)
+        public WebBetQuriesImpl( WebBetDbContext context)
         {
             this.context = context;
-            this.walletValidation = walletValidation;
         }
 
         public IEnumerable<WebMatchOffer> GetMatchesGroupedBySport()
@@ -55,10 +54,14 @@ namespace WebBetApp.Main
 
         public void PostWebTicketToDb(WebTicket webTicket)
         {
-       
-            walletValidation.Validate(webTicket);
+            var balance = GetBalance();
+
+            WalletValidation.ValidateWalletBalanceGreaterThenStake(webTicket, balance);
+            TicketValidation.ValidateTicket(webTicket, context);
+
             try
             {
+
                 var ticket = new Ticket
                 {
                     TicketCode = Service.GenerateTicketCode(),
@@ -70,11 +73,9 @@ namespace WebBetApp.Main
                 };
 
                 context.Tickets.Add(ticket);
-                
 
                 foreach (var match in webTicket.TicketMatches)
                 {
-                   
                    context.TicketMatches.Add(match);
                 }
 
@@ -115,11 +116,12 @@ namespace WebBetApp.Main
 
             return new WebWallet { Amount = balance };
         }
-       
 
         public void MakeTransaction(WebWallet webWalletDeposit)
         {
-           
+            var balance = GetBalance();
+            WalletValidation.ValidateBalanceMustNotBeLessThanZero(webWalletDeposit, balance);
+
             try
             {
                 var transaction = new Transaction
@@ -139,7 +141,6 @@ namespace WebBetApp.Main
                 throw ex;
             }
         }
-
 
         private void UpdateBalance()
         {

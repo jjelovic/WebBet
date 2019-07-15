@@ -1,16 +1,16 @@
 export class WebbetTicketMatch {
 
     pair   :string;
-    id:number;
+    matchId:number;
     type: string;
     quota: number;
-    selectedInTO: boolean;
+    selectedInTopOffer: boolean;
     
-    constructor(pair, id,type, quota, selectedInTO){
-        this.id = id;
+    constructor(pair, matchId,type, quota, selectedInTopOffer){
+        this.matchId = matchId;
         this.pair = pair;
         this.type = type;
         this.quota = quota;
-        this.selectedInTO = selectedInTO;
+        this.selectedInTopOffer = selectedInTopOffer;
     }
 }

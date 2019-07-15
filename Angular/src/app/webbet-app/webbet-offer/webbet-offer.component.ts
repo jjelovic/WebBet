@@ -54,21 +54,21 @@ export class WebbetOfferComponent implements OnInit {
       pair:  match.pair,
       quota: selectedInTO? quota * 1.05 : quota,
       type:  type,
-      id:    match.id,
-      selectedInTO: selectedInTO
+      matchId:    match.id,
+      selectedInTopOffer: selectedInTO
     }
 
-    this.ticketHasTopOfferBet = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.selectedInTO).length > 0;
-    let existingPair = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.id == this.ticketMatch.id)[0];
+    this.ticketHasTopOfferBet = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.selectedInTopOffer).length > 0;
+    let existingPair = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.matchId == this.ticketMatch.matchId)[0];
     
 
      if(typeof existingPair !== "undefined" ){
       
       //Same match selected but different qouta
-      if(existingPair.quota !== this.ticketMatch.quota || this.ticketMatch.selectedInTO){
+      if(existingPair.quota !== this.ticketMatch.quota || this.ticketMatch.selectedInTopOffer){
           
 
-          let typeToSwitchPairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.id == this.ticketMatch.id);
+          let typeToSwitchPairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.matchId == this.ticketMatch.matchId);
           this.ticketService.ticketFormData.ticketMatches[typeToSwitchPairIndex] =this.ticketMatch;
     
           //Update ticket
@@ -85,7 +85,7 @@ export class WebbetOfferComponent implements OnInit {
            if(this.ticketMatch.quota !== null ) {
 
               //Cannot combine top offer matches, only one allowed
-               if(!(this.ticketMatch.selectedInTO && this.ticketHasTopOfferBet)){
+               if(!(this.ticketMatch.selectedInTopOffer && this.ticketHasTopOfferBet)){
 
                this.ticketService.ticketFormData.ticketMatches.push(this.ticketMatch);
                this.ticketService.updateTotalCoefficient();

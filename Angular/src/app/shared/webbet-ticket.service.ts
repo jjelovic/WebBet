@@ -50,7 +50,7 @@ export class WebbetTicketService {
 
 validateTicketForm(){
 
-  this.topOfferPairPlus5 =  (this.ticketFormData.ticketMatches.filter(el=> el.selectedInTO).length !== 0
+  this.topOfferPairPlus5 =  (this.ticketFormData.ticketMatches.filter(el=> el.selectedInTopOffer).length !== 0
                                 && this.ticketFormData.ticketMatches.length < 6); 
 
   this.stakeGreatherThenWalletAmount = this.ticketFormData.stake > this.wallet.amount;

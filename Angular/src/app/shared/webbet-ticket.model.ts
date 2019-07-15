@@ -24,10 +24,10 @@ export class WebbetTicket {
         ticketMatches.array.forEach(function(element){
             tempMatchArray.push( new WebbetTicketMatch(
                 element.pair,
-                element.id, 
+                element.matchId, 
                 element.type,
                 element.quota,
-                element.selectedInTO
+                element.selectedInTopOffer
             ));
         })
         

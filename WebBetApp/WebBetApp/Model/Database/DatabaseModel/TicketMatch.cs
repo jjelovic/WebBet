@@ -10,7 +10,8 @@ namespace WebBetApp.Model.Database.DatabaseModel
     public class TicketMatch
     {
         [Key]
-        public int TicketMatchId { get; set; }
+        public int Id { get; set; }
+
         [Column(TypeName = "nvarchar(max)")]
         public string Pair { get; set; }
 
@@ -20,7 +21,13 @@ namespace WebBetApp.Model.Database.DatabaseModel
         [Column(TypeName = "decimal(19,2)")]
         public double Quota { get; set; }
 
+        public int MatchId { get; set; }
+
+        public bool SelectedInTopOffer { get; set; }
+
         public Nullable<int> TicketId { get; set; }
+
+
         public virtual Ticket Ticket { get; set; }
     }
 }

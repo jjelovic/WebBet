@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBetApp.Model.Database;
 
 namespace WebBetApp.Migrations
 {
     [DbContext(typeof(WebBetDbContext))]
-    partial class WebBetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190712132354_TicketMatch_changes")]
+    partial class TicketMatch_changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,8 +123,6 @@ namespace WebBetApp.Migrations
                     b.Property<decimal>("Quota")
                         .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
                         .HasColumnType("decimal(19,2)");
-
-                    b.Property<bool>("SelectedInTopOffer");
 
                     b.Property<int?>("TicketId");
 

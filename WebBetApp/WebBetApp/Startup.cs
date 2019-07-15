@@ -33,7 +33,6 @@ namespace WebBetApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
-            services.AddScoped(typeof(Validation<TypeOfObjectToValidate>), typeof(WalletValidation));
             services.AddDbContext<WebBetDbContext>(options =>
                                                    options.UseSqlServer(Configuration.GetConnectionString("WebBetDbContext")));
 

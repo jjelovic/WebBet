@@ -36,7 +36,7 @@ export class WebbetTicketComponent implements OnInit {
 
    deletePair(match : WebbetTicketMatch){
 
-    let pairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.id == match.id);
+    let pairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.matchId == match.matchId);
     this.ticketService.ticketFormData.ticketMatches.splice(pairIndex,1); 
 
     this.updateTicket();
@@ -58,7 +58,9 @@ export class WebbetTicketComponent implements OnInit {
       dialogTicketConfig.autoFocus = false;
       dialogTicketConfig.disableClose = true;
       dialogTicketConfig.height = '100mv';
+     
       dialogTicketConfig.width = "95%";
+    
       const openTicketDialog = this.dialog.open(WebbetTicketListComponent,dialogTicketConfig);
   }
 
