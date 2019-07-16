@@ -37,9 +37,5 @@ table{ font-size: 14px; padding: 4px }
 .listItem .secondRow .details                { overflow: hidden; white-space: nowrap; }
 .listItem .secondRow .details .delete        { float: right;}
 
-.typeSelected                               { background-color: rgba(0,0,0,0.37); cursor: default; }
+.typeSelected                               { background-color: rgba(0,0,0,0.37); cursor: default;  border-radius: 11px;   text-align: center;  } 
 
-/* .matchPreview .matchPreviewTableBody .row{  overflow: hidden; white-space: nowrap; 
-    -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis; 
-
-} */
