@@ -1,16 +1,17 @@
 
 export class WebbetOffer {
-    id              :number;
-    pair            :string;
-    type1           :number;
-    typeX           :number;
-    type2           :number;
-    type1X          :number;
-    typeX2          :number;
-    type12          :number;
-    sportId         :number;
-    isPartOfTopOffer:boolean;
-
+    id                   :number;
+    pair                 :string;
+    type1                :number;
+    typeX                :number;
+    type2                :number;
+    type1X               :number;
+    typeX2               :number;
+    type12               :number;
+    sportId              :number;
+    isPartOfTopOffer     :boolean;
+    selectedType         :string;
+    selectedTopOfferType :string;
 
     constructor(id,pair,type1,typeX,type2,type1X,typeX2,type12,isPartOfTopOffer,sportId){
         this.id               = id;

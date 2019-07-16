@@ -3,6 +3,7 @@ import { WebbetAppService } from './webbet-app.service';
 import { WebbetWallet } from 'src/app/shared/webbet-wallet.model';
 import { WebbetTicket } from './webbet-ticket.model';
 import { Injectable } from '@angular/core';
+import { WebbetOffer } from './webbet-offer.model';
 
 
 @Injectable({
@@ -24,6 +25,7 @@ export class WebbetTicketService {
   ticketMatches : WebbetTicketMatch[];
   ticketMatchesForPreview: WebbetTicketMatch[];
   acitveTicketCode: string;
+  matchArray: WebbetOffer[] = [];
 
   updateTotalCoefficient(){
     let totalCoefficient =  this.ticketFormData.ticketMatches.reduce(function(acc,qu) { return acc * qu.quota; }, 1); 

@@ -1,53 +1,65 @@
 <div>
-      <div>
-        <div class="p-2 mb-1 bg-secondary text-white" >Top ponuda</div>
-        <table class="table  table-borderless" >
-          <thead class="thead-light">
-            <th></th>
-            <th>1</th>
-            <th>X</th>
-            <th>2</th>
-            <th>1X</th>
-            <th>X2</th>
-            <th>12</th>
-          </thead>
-     
-          <tbody *ngFor="let item of topOfferList">
-             <tr *ngFor="let match of item.topOfferMatches">
-              <td >{{match.pair }}</td>
+  <div>
+    <div class="p-2 mb-1 bg-secondary text-white" >Top ponuda</div>
+    <table class="table  table-borderless" >
+      <thead class="thead-light">
+        <th></th>
+        <th>1</th>
+        <th>X</th>
+        <th>2</th>
+        <th>1X</th>
+        <th>X2</th>
+        <th>12</th>
+      </thead>
+ 
+      <tbody *ngFor="let item of topOfferList">
+         <tr *ngFor="let match of item.topOfferMatches;">
+          <td >{{match.pair }}</td>
 
-              <td *ngIf="match.type1; else  type1TemplateTO"  (click)="addMatchToTicket(match, match.type1,  betTypeEnum.HomeTeamWins,         true)">
-                {{match.type1 * 1.05 | number : '1.2-2'}} 
-              </td>   <ng-template #type1TemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.type1; else  type1TemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.HomeTeamWins}"
+              (click)="addMatchToTicket(match, match.type1, betTypeEnum.HomeTeamWins, true)">
+            {{match.type1 * 1.05 | number : '1.2-2'}}
+          </td>   <ng-template #type1TemplateTO> <td>-</td></ng-template>
 
-              <td *ngIf="match.typeX; else  typeXTemplateTO" (click)="addMatchToTicket(match, match.typeX,  betTypeEnum.Draw,                  true)">
-                {{match.typeX * 1.05 | number : '1.2-2'}} 
-              </td> <ng-template #typeXTemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.typeX; else  typeXTemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.Draw}"
+              (click)="addMatchToTicket(match, match.typeX, betTypeEnum.Draw, true)">
+            {{match.typeX * 1.05 | number : '1.2-2'}} 
+          </td> <ng-template #typeXTemplateTO> <td>-</td></ng-template>
 
-              <td  *ngIf="match.type2; else  type2TemplateTO" (click)="addMatchToTicket(match, match.type2,  betTypeEnum.GuestTeamWins,        true)">
-                {{match.type2 * 1.05 | number : '1.2-2'}} 
-              </td> <ng-template #type2TemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.type2; else  type2TemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.GuestTeamWins}"
+              (click)="addMatchToTicket(match, match.type2,  betTypeEnum.GuestTeamWins,        true)">
+            {{match.type2 * 1.05 | number : '1.2-2'}} 
+          </td> <ng-template #type2TemplateTO> <td>-</td></ng-template>
 
-              <td *ngIf="match.type1X; else  type1XTemplateTO"  (click)="addMatchToTicket(match, match.type1X, betTypeEnum.HomeTeamWinsOrDraw, true)">
-                {{match.type1X * 1.05 | number : '1.2-2'}}
-              </td> <ng-template #type1XTemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.type1X; else  type1XTemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.HomeTeamWinsOrDraw}"
+              (click)="addMatchToTicket(match, match.type1X, betTypeEnum.HomeTeamWinsOrDraw, true)">
+            {{match.type1X * 1.05 | number : '1.2-2'}}
+          </td> <ng-template #type1XTemplateTO> <td>-</td></ng-template>
 
-              <td *ngIf="match.typeX2; else  typeX2TemplateTO" (click)="addMatchToTicket(match, match.typeX2, betTypeEnum.GuestTeamWinsOrDraw, true)">
-                {{match.typeX2 * 1.05 | number : '1.2-2'}}
-              </td> <ng-template #typeX2TemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.typeX2; else  typeX2TemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.GuestTeamWinsOrDraw}"
+              (click)="addMatchToTicket(match, match.typeX2, betTypeEnum.GuestTeamWinsOrDraw, true)">
+            {{match.typeX2 * 1.05 | number : '1.2-2'}}
+          </td> <ng-template #typeX2TemplateTO> <td>-</td></ng-template>
 
-              <td *ngIf="match.type12; else  type12TemplateTO" (click)="addMatchToTicket(match, match.type12, betTypeEnum.HomeOrGuestTeamWins, true)">
-                {{match.type12 * 1.05 | number : '1.2-2'}}
-              </td> <ng-template #type12TemplateTO> <td>-</td></ng-template>
+          <td *ngIf="match.type12; else  type12TemplateTO"
+              [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.HomeOrGuestTeamWins}"
+              (click)="addMatchToTicket(match, match.type12, betTypeEnum.HomeOrGuestTeamWins, true)">
+            {{match.type12 * 1.05 | number : '1.2-2'}}
+          </td> <ng-template #type12TemplateTO> <td>-</td></ng-template>
 
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <div *ngFor="let item of offerList">
+<div *ngFor="let item of offerList">
   <div class="p-2 mb-1 bg-secondary text-white" >{{item.sport}}</div>
-  <table class="table table-borderless" >
+    <table class="table table-borderless" >
     <thead class="thead-light">
       <th></th>
       <th>1</th>
@@ -58,35 +70,47 @@
       <th>12</th>
     </thead>
 
-    <tbody>
-       <tr *ngFor="let match of item.matches">
-          <td >{{match.pair }}</td>
+        <tbody>
+          <tr *ngFor="let match of item.matches">
+              <td >{{match.pair }}</td>
 
-          <td *ngIf="match.type1; else  type1Template"  (click)="addMatchToTicket(match, match.type1,  betTypeEnum.HomeTeamWins,        false)">
-            {{match.type1 | number : '1.2'}} 
-          </td> <ng-template #type1Template> <td>-</td></ng-template>
+              <td *ngIf="match.type1; else  type1Template"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.HomeTeamWins}"
+                  (click)="addMatchToTicket(match, match.type1,  betTypeEnum.HomeTeamWins,       false)">
+                {{match.type1 | number : '1.2'}} 
+              </td> <ng-template #type1Template> <td>-</td></ng-template>
 
-          <td *ngIf="match.typeX; else  typeXTemplate" (click)="addMatchToTicket(match,   match.typeX,  betTypeEnum.Draw,                false)">
-            {{match.typeX | number : '1.2'}} 
-          </td> <ng-template #typeXTemplate> <td>-</td></ng-template>
+              <td *ngIf="match.typeX; else  typeXTemplate"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.Draw}"
+                  (click)="addMatchToTicket(match,   match.typeX,  betTypeEnum.Draw,             false)">
+                {{match.typeX | number : '1.2'}} 
+              </td> <ng-template #typeXTemplate> <td>-</td></ng-template>
 
-          <td *ngIf="match.type2; else  type2Template" (click)="addMatchToTicket(match,   match.type2,  betTypeEnum.GuestTeamWins,       false)">
-            {{match.type2 | number : '1.2'}} 
-          </td> <ng-template #type2Template> <td>-</td></ng-template>
+              <td *ngIf="match.type2; else  type2Template"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.GuestTeamWins}"          
+                  (click)="addMatchToTicket(match,   match.type2,  betTypeEnum.GuestTeamWins,     false)">
+                {{match.type2 | number : '1.2'}} 
+              </td> <ng-template #type2Template> <td>-</td></ng-template>
 
-          <td *ngIf="match.type1X; else  type1XTemplate" (click)="addMatchToTicket(match, match.type1X, betTypeEnum.HomeTeamWinsOrDraw,  false)">
-            {{match.type1X | number : '1.2'}}
-          </td> <ng-template #type1XTemplate> <td>-</td></ng-template>
+              <td *ngIf="match.type1X; else  type1XTemplate"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.HomeTeamWinsOrDraw}"          
+                  (click)="addMatchToTicket(match, match.type1X, betTypeEnum.HomeTeamWinsOrDraw,  false)">
+                {{match.type1X | number : '1.2'}}
+              </td> <ng-template #type1XTemplate> <td>-</td></ng-template>
 
-          <td *ngIf="match.typeX2; else  typeX2Template" (click)="addMatchToTicket(match, match.typeX2, betTypeEnum.GuestTeamWinsOrDraw, false)">
-            {{match.typeX2 | number : '1.2'}}
-          </td> <ng-template #typeX2Template> <td>-</td></ng-template>
+              <td *ngIf="match.typeX2; else  typeX2Template"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.GuestTeamWinsOrDraw}"
+                  (click)="addMatchToTicket(match, match.typeX2, betTypeEnum.GuestTeamWinsOrDraw, false)">
+                {{match.typeX2 | number : '1.2'}}
+              </td> <ng-template #typeX2Template> <td>-</td></ng-template>
 
-          <td *ngIf="match.type12; else  type12Template" (click)="addMatchToTicket(match, match.type12, betTypeEnum.HomeOrGuestTeamWins, false)">
-            {{match.type12 | number : '1.2'}}
-          </td> <ng-template #type12Template> <td>-</td></ng-template>
-    </tr> 
-    </tbody>
-  </table>
+              <td *ngIf="match.type12; else  type12Template"
+                  [ngClass]="{'typeSelected': match.selectedType == betTypeEnum.HomeOrGuestTeamWins}"          
+                  (click)="addMatchToTicket(match, match.type12, betTypeEnum.HomeOrGuestTeamWins, false)">
+                {{match.type12 | number : '1.2'}}
+              </td> <ng-template #type12Template> <td>-</td></ng-template>
+        </tr> 
+        </tbody>
+    </table>
   </div>
 </div>

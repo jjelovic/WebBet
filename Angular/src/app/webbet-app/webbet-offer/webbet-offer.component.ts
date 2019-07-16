@@ -62,43 +62,59 @@ export class WebbetOfferComponent implements OnInit {
     let existingPair = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.matchId == this.ticketMatch.matchId)[0];
     
 
-     if(typeof existingPair !== "undefined" ){
+    if(typeof existingPair !== "undefined" ){
       
       //Same match selected but different qouta
       if(existingPair.quota !== this.ticketMatch.quota || this.ticketMatch.selectedInTopOffer){
           
 
-          let typeToSwitchPairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.matchId == this.ticketMatch.matchId);
-          this.ticketService.ticketFormData.ticketMatches[typeToSwitchPairIndex] =this.ticketMatch;
-    
-          //Update ticket
-           this.ticketService.updateTotalCoefficient();
-           this.ticketService.updatePossibleReturn();
+        let typeToSwitchPairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.matchId == this.ticketMatch.matchId);
+        this.ticketService.ticketFormData.ticketMatches[typeToSwitchPairIndex] =this.ticketMatch;
+  
+        //Update ticket
+          this.ticketService.updateTotalCoefficient();
+          this.ticketService.updatePossibleReturn();
 
-           this.ticketService.validateTicketForm();
+          this.ticketService.validateTicketForm();
 
-           this.ticketService.isSecondTopOfferMatchSelected = false;
-           }
-        }
-        else {
+          this.ticketService.isSecondTopOfferMatchSelected = false;
+
+          if (selectedInTO) {
+            match.selectedTopOfferType = type;
+            match.selectedType = null;
+          } else {
+            match.selectedType = type;
+            match.selectedTopOfferType = null
+          }
+      }
+    } else {
      
-           if(this.ticketMatch.quota !== null ) {
+      if(this.ticketMatch.quota !== null ) {
 
-              //Cannot combine top offer matches, only one allowed
-               if(!(this.ticketMatch.selectedInTopOffer && this.ticketHasTopOfferBet)){
+        //Cannot combine top offer matches, only one allowed
+        if(!(this.ticketMatch.selectedInTopOffer && this.ticketHasTopOfferBet)){
 
-               this.ticketService.ticketFormData.ticketMatches.push(this.ticketMatch);
-               this.ticketService.updateTotalCoefficient();
-               this.ticketService.updateStakeWithMtCosts();
-               this.ticketService.updatePossibleReturn();
+          this.ticketService.ticketFormData.ticketMatches.push(this.ticketMatch);
+          this.ticketService.matchArray.push(match);
+          this.ticketService.updateTotalCoefficient();
+          this.ticketService.updateStakeWithMtCosts();
+          this.ticketService.updatePossibleReturn();
 
-               this.ticketService.validateTicketForm();
-               this.ticketService.isSecondTopOfferMatchSelected = false;
-            }
-            else this.ticketService.isSecondTopOfferMatchSelected = true;
+          this.ticketService.validateTicketForm();
+          this.ticketService.isSecondTopOfferMatchSelected = false;
 
-            this.ticketService.validateTicketForm();
+          if (selectedInTO) {
+            match.selectedTopOfferType = type;
+            match.selectedType = null;
+          } else {
+            match.selectedType = type;
+            match.selectedTopOfferType = null
           }
         }
+        else this.ticketService.isSecondTopOfferMatchSelected = true;
+
+        this.ticketService.validateTicketForm();
+      }
+    }
   }
 }

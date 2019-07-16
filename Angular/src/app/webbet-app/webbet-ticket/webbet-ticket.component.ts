@@ -36,8 +36,13 @@ export class WebbetTicketComponent implements OnInit {
 
    deletePair(match : WebbetTicketMatch){
 
+    let offerMatchIndex = this.ticketService.matchArray.findIndex(el => el.id == match.matchId);
+    this.ticketService.matchArray[offerMatchIndex].selectedType = null;
+    this.ticketService.matchArray[offerMatchIndex].selectedTopOfferType = null;
+    this.ticketService.matchArray.splice(offerMatchIndex, 1);
+
     let pairIndex = this.ticketService.ticketFormData.ticketMatches.findIndex(el=> el.matchId == match.matchId);
-    this.ticketService.ticketFormData.ticketMatches.splice(pairIndex,1); 
+    this.ticketService.ticketFormData.ticketMatches.splice(pairIndex, 1); 
 
     this.updateTicket();
     this.ticketService.validateTicketForm();
