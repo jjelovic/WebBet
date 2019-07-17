@@ -27,8 +27,8 @@ table{ font-size: 14px; padding: 4px }
 .listItem .firstRow .Wrapper .separator       { font-size: 19px; }
 .listItem .firstRow .Wrapper .numberOfMatches { font-size: 19px; }
 .listItem .firstRow .Wrapper .ticketCode      { font-size: 19px; }
-.listItem .firstRow .details                      { overflow: hidden; white-space: nowrap; 
-                                              -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  }
+/* .listItem .firstRow .details                  { overflow: hidden; white-space: nowrap; 
+                                              -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  } */
 
 .listItem.selected                           { background-color: rgba(0,0,0,0.08); cursor: default; }
 
