@@ -39,3 +39,4 @@ table{ font-size: 14px; padding: 4px }
 
 .typeSelected                               { background-color: rgba(0,0,0,0.37); cursor: default;  border-radius: 11px;   text-align: center;  } 
 
+div.form-group.required>label:first-child:after {  content:'*'; color: #dc3545; padding-left: 5px; }

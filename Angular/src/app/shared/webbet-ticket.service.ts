@@ -25,7 +25,7 @@ export class WebbetTicketService {
   ticketMatches : WebbetTicketMatch[];
   ticketMatchesForPreview: WebbetTicketMatch[];
   acitveTicketCode: string;
-  matchArray: WebbetOffer[] = [];
+  matchArray: WebbetOffer[] = [] ;
 
   updateTotalCoefficient(){
     let totalCoefficient =  this.ticketFormData.ticketMatches.reduce(function(acc,qu) { return acc * qu.quota; }, 1); 

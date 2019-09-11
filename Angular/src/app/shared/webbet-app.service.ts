@@ -43,4 +43,7 @@ export class WebbetAppService {
   deleteWebbetTicket(webbetTicketCode: string){
     return this.http.delete(this.rootURL + '/Ticket/' + webbetTicketCode);
   }
+  register( registrationBody: any){
+    return this.http.post(this.rootURL + '/ApplicationUser/Register', registrationBody );
+  }
 }

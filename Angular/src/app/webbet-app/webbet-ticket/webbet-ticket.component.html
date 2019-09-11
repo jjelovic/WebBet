@@ -12,7 +12,7 @@
         <tbody *ngFor="let match of ticketService.ticketFormData.ticketMatches; let i= index">
           
           <tr> 
-           <td *ngIf="match.selectedInTO else template">{{'TP ' + match.pair}}</td> <ng-template #template><td>{{match.pair}}</td></ng-template>
+           <td *ngIf="match.selectedInTopOffer; else template">{{'TP ' + match.pair}}</td> <ng-template #template><td>{{match.pair}}</td></ng-template>
            <td>{{match.quota | number : '1.2-2'}}</td>
            <td>{{match.type}}</td>
            <td class="text-right"><button type="button"  (click)="deletePair(match)"class="btn btn-sm btn-outline-danger">x</button></td>
