@@ -1,13 +1,13 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 
-// import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WebbetAppComponent } from './webbet-app/webbet-app.component';
 import { WebbetOfferComponent } from './webbet-app/webbet-offer/webbet-offer.component';
@@ -21,13 +21,14 @@ import { WebbetTicketPreviewComponent } from './webbet-app/webbet-ticket/webbet-
 import { WebbetUserComponent } from './webbet-app/webbet-user/webbet-user.component';
 import { RegistrationComponent } from './webbet-app/webbet-user/registration/registration.component';
 import { WebbetUserService } from './shared/webbet-user.service';
+import { LoginComponent } from './webbet-app/webbet-user/login/login.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // AppRoutingModule,
     WebbetAppComponent,
     WebbetOfferComponent,
     WebbetTicketComponent,
@@ -36,7 +37,8 @@ import { WebbetUserService } from './shared/webbet-user.service';
     WebbetTicketListComponent,
     WebbetTicketPreviewComponent,
     WebbetUserComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -45,12 +47,22 @@ import { WebbetUserService } from './shared/webbet-user.service';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonToggleModule,
-    ToastrModule.forRoot(),
-    ReactiveFormsModule
-    // AppRoutingModule
+    ToastrModule.forRoot({
+      positionClass:'toast-bottom-right'
+    }),
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   entryComponents:[WebbetWalletDepositComponent, WebbetTicketListComponent],
-  providers: [WebbetAppService, WebbetUserService],
+  providers: [
+    WebbetAppService, 
+    WebbetUserService, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
