@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebBetApp.Main;
@@ -16,30 +18,39 @@ namespace WebBetApp.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
-        private readonly IWebBetQueries webBetQueries;
+        private readonly IWebBetQueries _webBetQueries;
+        private UserManager<ApplicationUser> _userManager;
 
-        public TicketController(IWebBetQueries webBetQueries)
+        public TicketController(IWebBetQueries webBetQueries, UserManager<ApplicationUser> userManager)
         {
-            this.webBetQueries = webBetQueries;
+            _webBetQueries = webBetQueries;
+            _userManager = userManager;
         }
 
         // GET: api/Ticket
         [HttpGet]
-        public IEnumerable<WebTicket> GetTickets()
+        public async Task<IEnumerable<WebTicket>> GetTickets()
         {
-            return webBetQueries.GetAllTickets();
+            var user = await _userManager.FindByIdAsync(User.Claims.First(cl => cl.Type == "UserId").Value);
+
+            return _webBetQueries.GetAllTickets(user);
         }
 
         [HttpPost]
-        public void PostTicket(WebTicket webTicket)
+        [Authorize]
+        public async Task<IActionResult> PostTicket(WebTicket webTicket)
         {
-            webBetQueries.PostWebTicketToDb(webTicket);
+            var user = await _userManager.FindByIdAsync(User.Claims.First(cl => cl.Type == "UserId").Value); 
+
+            _webBetQueries.PostWebTicketToDb(webTicket, user);
+
+            return Ok();
         }
 
         [HttpDelete("{ticketCode}")]
         public void DeleteTicket(string ticketCode)
         {
-            webBetQueries.DeleteTicketFromDb(ticketCode);
+            _webBetQueries.DeleteTicketFromDb(ticketCode);
         }
     }
 }

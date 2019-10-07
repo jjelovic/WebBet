@@ -50,6 +50,7 @@ export class WebbetOfferComponent implements OnInit {
   }
 
   addMatchToTicket(match: WebbetOffer, quota:number, type : string, selectedInTO: boolean ){
+    
     this.ticketMatch = {
       pair:  match.pair,
       quota: selectedInTO? quota * 1.05 : quota,
@@ -64,9 +65,6 @@ export class WebbetOfferComponent implements OnInit {
     let existingPair = this.ticketService.ticketFormData.ticketMatches.filter(el=> el.matchId == this.ticketMatch.matchId)[0];
     
     if(typeof existingPair !== "undefined" ){
- 
-
-
 
       let topOfferMatchAllowedToEdit = this.topOfferMatch != null ? (existingPair.matchId === this.topOfferMatch.matchId) && existingPair.selectedInTopOffer: false;
       if(this.topOfferMatch!= null) console.log(topOfferMatchAllowedToEdit)

@@ -4,6 +4,7 @@ import { WebbetWallet } from 'src/app/shared/webbet-wallet.model';
 import { NgForm } from '@angular/forms';
 import { WebbetAppService } from 'src/app/shared/webbet-app.service';
  import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -13,9 +14,6 @@ import { WebbetAppService } from 'src/app/shared/webbet-app.service';
   styles: []
 })
 export class WebbetWalletDepositComponent implements OnInit {
-
-
-  // log(x) {console.log(x);}    html input (change)="log(amount)"
   
   formData : WebbetWallet;
   isValid :boolean = true;
@@ -23,7 +21,7 @@ export class WebbetWalletDepositComponent implements OnInit {
   constructor( 
     public dialogRef: MatDialogRef<WebbetWalletDepositComponent>, 
     private service: WebbetAppService,
-    // private router: Router
+    private toastr: ToastrService
     ) { }
 
   ngOnInit() {
@@ -33,19 +31,18 @@ export class WebbetWalletDepositComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-      // this.validateForm(form.value);
 
       this.service.postWalletDeposit(form.value).subscribe( res=> 
         {
           this.dialogRef.close();
-          // this.router.navigate(['/webbetApp']);
-          this.service.getWalletBalance();
+          
+          this.toastr.success("Uspješno ste doplatili novčanik");
         },
           err => {
             console.log(err)
           });
     }
+
     validateForm(formData : WebbetWallet){
-      
     };
 }

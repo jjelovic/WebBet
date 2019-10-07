@@ -14,8 +14,5 @@ namespace WebBetApp.Helper
 
             return String.Format("{0}{1}", "wb", randomNum);
         }
-
-
-
     }
 }

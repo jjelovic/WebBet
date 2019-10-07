@@ -9,7 +9,7 @@
   <div class="col-md-7">
     <div class="">
       <ul class="list">
-          <!-- <span *ngIf="ticketList.length === 0">Nema spremljenih listića</span> -->
+          <!-- <span *ngIf="ticketList.length === 0">Nemate spremljenih listića</span> -->
         <li class="listItem" *ngFor="let ticket of ticketList" (click)="previewMatches(ticket.ticketMatches, ticket.ticketCode)"
             [class.selected]=" ticket.ticketCode === ticketService.acitveTicketCode"> 
             <div class="firstRow clearfix">
@@ -29,7 +29,7 @@
             </div>
             <div class="secondRow clearfix">
                 <div class="details"> <span> 
-                  Ulog: {{ticket.stake}} kn <b>|</b>
+                  Ulog: {{ticket.stakeWithManipulationCosts}} kn <b>|</b>
                   Uk. koeficijent: {{ticket.totalMatchesCoefficient | number :'1.2'}} <b>|</b>
                   Mogući dobitak:<b> {{ticket.possibleReturn | number :'1.2'}} kn</b>
                   </span>

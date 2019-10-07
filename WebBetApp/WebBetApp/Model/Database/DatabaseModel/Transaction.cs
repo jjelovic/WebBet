@@ -15,7 +15,12 @@ namespace WebBetApp.Model.Database.DatabaseModel
         [Column(TypeName = "decimal(19,2)")]
         public double Amount { get; set; }
 
-        [Column(TypeName ="datetimeoffset(7)")]
+        [Column(TypeName = "nvarchar(450)")]
+        public string ApplicationUserId { get; set; }
+
+        [Column(TypeName = "datetimeoffset(7)")]
         public DateTimeOffset TransactionDate { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

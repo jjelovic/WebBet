@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,8 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using WebBetApp.Main;
 using WebBetApp.Main.Validation;
+using WebBetApp.Model;
 using WebBetApp.Model.Database;
 using WebBetApp.Model.Database.Testing;
 using WebBetApp.Model.ViewModels;
@@ -35,6 +39,7 @@ namespace WebBetApp
 
             services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
 
+            services.Configure<AppSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddDbContext<WebBetDbContext>(options =>
                                                    options.UseSqlServer(Configuration.GetConnectionString("WebBetDbContext")));
 
@@ -51,6 +56,27 @@ namespace WebBetApp
             });
 
             services.AddCors();
+
+            var signinigKey = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JsonWebTokenSecurityKey"].ToString());
+
+            //Authentication
+            services.AddAuthentication(x =>
+           {
+               x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+               x.DefaultChallengeScheme= JwtBearerDefaults.AuthenticationScheme;
+               x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+           }).AddJwtBearer( x => {
+               x.RequireHttpsMetadata = false;
+               x.SaveToken = false;
+               x.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(signinigKey),
+                   ValidateIssuer = false,
+                   ValidateAudience = false,
+                   ClockSkew = TimeSpan.Zero
+               };
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +87,7 @@ namespace WebBetApp
                app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => options.WithOrigins("http://localhost:4200")
+            app.UseCors(options => options.WithOrigins(Configuration["ApplicationSettings:ClientUrl"].ToString())
                                           .AllowAnyMethod()
                                           .AllowAnyHeader());
             app.UseAuthentication();

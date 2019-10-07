@@ -32,6 +32,10 @@ namespace WebBetApp.Model.Database.DatabaseModel
         [Column(TypeName = "decimal(19,2)")]
         public double TotalMatchesCoefficient { get; set; }
 
+        [Column(TypeName ="nvarchar(450)")]
+        public string ApplicationUserId { get; set; }
+    
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<TicketMatch> TicketMatches{ get; set; }
 

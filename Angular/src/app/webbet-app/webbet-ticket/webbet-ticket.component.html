@@ -55,7 +55,7 @@
           <span *ngIf="ticketService.topOfferPairPlus5" >
             <i>Uz par iz top ponude morate odabrati još 5 parova iz redovne ponude</i> <br>
         </span>
-        <span *ngIf="ticketService.ticketFormData.stake > ticketService.wallet.amount" >
+        <span *ngIf="ticketService.ticketFormData.stake > userService.userDetails.userWalletBalance" >
           <i>Nemate dovoljno novca u novčaniku</i> <br>
       </span>
       <span *ngIf="ticketService.isSecondTopOfferMatchSelected" >
@@ -68,7 +68,7 @@
                   [disabled]="ticketService.ticketFormData.ticketMatches.length === 0 ||
                               ticketService.ticketFormData.stake  < 2 || 
                               ticketService.topOfferPairPlus5 || 
-                              ticketService.ticketFormData.stake > ticketService.wallet.amount ||
+                              ticketService.ticketFormData.stake > userService.userDetails.userWalletBalance ||
                               ticketService.isSecondTopOfferMatchSelected" >
                   Spremi listić
                 </button>
