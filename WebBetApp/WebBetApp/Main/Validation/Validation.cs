@@ -48,18 +48,19 @@ namespace WebBetApp.Main.Validation
     {
         public static bool IsValid { get; set; }
 
-        public static void ValidateWalletBalanceGreaterThenStake(WebTicket objectToValidate, WebWallet walletBalance)
+        public static void ValidateWalletBalanceGreaterThenStake(WebTicket objectToValidate, double walletBalance)
         {
-            IsValid = (walletBalance.Amount >= objectToValidate.Stake);
+            IsValid = (walletBalance >= objectToValidate.Stake);
 
-            if (!IsValid) throw new ValidationException("Stake cannot be greater than wallet balance. Insufficient funds.");
+            if (!IsValid) throw new Exception("Stake cannot be greater than wallet balance. Insufficient funds.");
         }
 
-        public static void ValidateBalanceMustNotBeLessThanZero(WebWallet walletDeposit, WebWallet walletBalance)
+        public static void ValidateBalanceMustNotBeLessThanZero(WebWallet walletDeposit, double walletBalance)
         {
-            IsValid = !(walletBalance.Amount <= 0 &&  walletDeposit.Amount < 0);
 
-            if (!IsValid) throw new ValidationException("Invalid deposit, wallet amuont cannot be less than zero.");
+            IsValid = !(walletBalance <= 0 &&  walletDeposit.Amount < 0);
+
+            if (!IsValid) throw new Exception("Invalid deposit, wallet amuont cannot be less than zero.");
         }
 
     }

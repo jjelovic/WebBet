@@ -1,0 +1,77 @@
+ng new Agular7 - instalacija Angulara i odgovrajuæih komponenti
+
+code . - otvaranje projekta u VS Codeu
+
+
+------------------------------
+
+u package.json promijeniti "rxjs": "^6.0.0" u "rxjs": "6.0.0", poslije toga "npm update"
+
+npm update
+
+Bootstrap from https://getbootstrap.com/docs/4.3/getting-started/introduction/
+
+CSS:
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+JS:
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+
+fontawsome:
+<script src="https://kit.fontawesome.com/baa846f5c4.js"></script>
+
+
+
+u novom terminalu 
+
+ng g c webbet-app --spec=false  --s; za novu kompenentu bez zadanih tipiènih stlye.css i app.component.ts
+ng g c webbet-app/webbet-offer --spec=false  --s za offer komponenete
+ng g c webbet-app/webbet-ticket --spec=false  --s za ticket komponente
+ng g c webbet-app/webbet-wallet --spec=false  --s   za novèanik komponentu
+
+ng g s  shared/webbet-details  --spec=false  za service klase 
+ng g cl shared/webbet-offer --type=model   za model klasu u shared, 
+
+ng g c webbet-app/webbet-user --spec=false -s za kreiranje user foldera
+ng g c webbet-app/webbet-user/registration --spec=false -s za kreiranje segmenta za registraciju
+ng  g s shared/webbet-user --spec=false kreiranje userservice klase 
+
+ng g g auth/auth --spec=false dodavanje auth sustava za autentikaciju
+
+Instalirao popupdialog za skoèni prozor 
+ npm install --save @angular/material @angular/cdk @angular/animations
+
+
+dodao:
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+
+i
+imports: [
+...
+    BrowserAnimationsModule,
+    MatDialogModule
+  ],
+
+
+Microsoft.AspNetCore.Cors dodan s nugeta 
+Microsoft.EntityFrameworkCore v2.1.1
+
+
+Sticky sidebar:
+https://dev.to/claireparkerjones/how-to-make-a-sticky-sidebar-with-two-lines-of-css-2ki7
+
+toastr npm install ngx-toastr --save i u angualr.json dodaono ispod styles.css "styles": [
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
+            ],
+
+
+
+JWT - JSON Web Token korišten za autentikaciju
+https://jwt.io/introduction/
