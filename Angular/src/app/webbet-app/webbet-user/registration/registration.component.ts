@@ -11,13 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor( public userService : WebbetUserService, public appService: WebbetAppService, private tostr: ToastrService) { }
+  constructor( public userService : WebbetUserService, public service: WebbetAppService, private tostr: ToastrService) { }
 
   ngOnInit() {
     this.userService.userRegistrationFormModel.reset();
   }
  
   onSubmit(){
+    
     var registrationBody = {
       UserName: this.userService.userRegistrationFormModel.value.UserName,
       Email: this.userService.userRegistrationFormModel.value.Email,
@@ -25,7 +26,8 @@ export class RegistrationComponent implements OnInit {
       Password: this.userService.userRegistrationFormModel.value.Passwords.Password
     }
     
-    this.appService.register(registrationBody).subscribe(
+
+    this.service.register(registrationBody).subscribe(
       (res : any) => {
         if(res.succeeded){
           this.userService.userRegistrationFormModel.reset();

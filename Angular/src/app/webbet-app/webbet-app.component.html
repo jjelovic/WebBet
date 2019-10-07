@@ -1,20 +1,36 @@
-<div class="jumbotron-fluid">
-<br>
-  <div class="float-right" >
-    <app-webbet-wallet class=""></app-webbet-wallet>
-    <br>
-  </div>
+<nav class="navbar navbar-dark bg-dark ">
   
+  <!-- <a class="navbar-brand text-white"></a> -->
+  <a class="navbar-brand text-white">{{userService.userDetails.fullName}} </a>
+  <a class="navbar-brand text-white">Raspoloživi iznos: {{userService.userDetails.userWalletBalance}} kn</a>
+  <div class="btn-group" style="">
+  <a class="btn btn-sm btn-info text-white align-right" (click)="makeDeposit()">
+    <div class="display-5 text-right"><i class="fa fa-donate"></i> Doplati novčanik </div>
+  </a>
+  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Odjavi se</button>
+</div>>
+</nav>
+
+<div class="container">
+  
+  <div class="jumbotron-fluid">
+  <!-- <br>
+    <div class="float-right" >
+      <app-webbet-wallet class=""></app-webbet-wallet>
+      <br>
+    </div> -->
+    
     <br>
-  <hr>
-  <div class="row">
-    <div class="col-md-7">
-      <app-webbet-offer class=""></app-webbet-offer>
-    </div>
+    <!-- <hr>  -->
+    <div class="row">
+      <div class="col-md-7">
+        <app-webbet-offer class=""></app-webbet-offer>
+      </div>
 
 
-    <div class="col-md-5 sidebar">
-      <app-webbet-ticket class=""></app-webbet-ticket>
+      <div class="col-md-5 sidebar">
+        <app-webbet-ticket class=""></app-webbet-ticket> 
+      </div>
     </div>
   </div>
 </div>

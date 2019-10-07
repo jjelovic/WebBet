@@ -18,13 +18,13 @@
 
           <td *ngIf="match.type1; else  type1TemplateTO"
               [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.HomeTeamWins}"
-              (click)="addMatchToTicket(match, match.type1, betTypeEnum.HomeTeamWins, true)">
+              (click)="addMatchToTicket(match, match.type1, betTypeEnum.HomeTeamWins,         true)">
             {{match.type1 * 1.05 | number : '1.2-2'}}
           </td>   <ng-template #type1TemplateTO> <td>-</td></ng-template>
 
           <td *ngIf="match.typeX; else  typeXTemplateTO"
               [ngClass]="{'typeSelected': match.selectedTopOfferType == betTypeEnum.Draw}"
-              (click)="addMatchToTicket(match, match.typeX, betTypeEnum.Draw, true)">
+              (click)="addMatchToTicket(match, match.typeX, betTypeEnum.Draw,                 true)">
             {{match.typeX * 1.05 | number : '1.2-2'}} 
           </td> <ng-template #typeXTemplateTO> <td>-</td></ng-template>
 
