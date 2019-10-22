@@ -57,7 +57,6 @@ namespace WebBetApp.Main.Validation
 
         public static void ValidateBalanceMustNotBeLessThanZero(WebWallet walletDeposit, double walletBalance)
         {
-
             IsValid = !(walletBalance <= 0 &&  walletDeposit.Amount < 0);
 
             if (!IsValid) throw new Exception("Invalid deposit, wallet amuont cannot be less than zero.");

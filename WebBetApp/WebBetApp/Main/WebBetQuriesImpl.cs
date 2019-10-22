@@ -23,36 +23,36 @@ namespace WebBetApp.Main
 
         public IEnumerable<WebMatchOffer> GetMatchesGroupedBySport()
         {
-            return _context.Sports.SelectMany(m => m.Matches)
-                                 .GroupBy(m => m.Sport)
-                                 .ToList()
-                                 .Select(res =>
-                                             new WebMatchOffer
-                                             {
-                                                 Sport = res.Key.Name,
-                                                 Matches = res.ToList()
-                                             }
-                                         )
-                                 .ToList();
+            return _context.Sports
+                .SelectMany(m => m.Matches)
+                .GroupBy(m => m.Sport)
+                .ToList()
+                .Select(res =>
+                              new WebMatchOffer
+                              {
+                                 Sport = res.Key.Name,
+                                 Matches = res.ToList()
+                              })
+                .ToList();
         }
 
         public IEnumerable<WebTicket> GetAllTickets(ApplicationUser user)
         {
-            return 
-                _context.Tickets.Include(i => i.TicketMatches)
-                                .Where( tm => tm.ApplicationUserId == user.Id)
-                                .Select(t =>
-                                           new WebTicket
-                                           {
-                                               Id = t.Id,
-                                               TicketCode = t.TicketCode,
-                                               Stake = t.Stake,
-                                               PossibleReturn = t.PossibleReturn,
-                                               StakeWithManipulationCosts = t.StakeWithManipulationCosts,
-                                               TotalMatchesCoefficient = t.TotalMatchesCoefficient,
-                                               TicketMatches = t.TicketMatches
-                                           })
-                               .ToList();
+            return _context.Tickets
+                .Include(i => i.TicketMatches)
+                .Where( tm => tm.ApplicationUserId == user.Id)
+                .Select(t =>
+                            new WebTicket
+                            {
+                                Id = t.Id,
+                                TicketCode = t.TicketCode,
+                                Stake = t.Stake,
+                                PossibleReturn = t.PossibleReturn,
+                                StakeWithManipulationCosts = t.StakeWithManipulationCosts,
+                                TotalMatchesCoefficient = t.TotalMatchesCoefficient,
+                                TicketMatches = t.TicketMatches
+                            })
+                .ToList();
         }
 
         public void PostWebTicketToDb(WebTicket webTicket, ApplicationUser user)
@@ -102,7 +102,9 @@ namespace WebBetApp.Main
 
         public void DeleteTicketFromDb(string ticketCode)
         {
-            var ticket = _context.Tickets.Include(tm => tm.TicketMatches).SingleOrDefault(t => t.TicketCode == ticketCode);
+            var ticket = _context.Tickets
+                .Include(tm => tm.TicketMatches)
+                .SingleOrDefault(t => t.TicketCode == ticketCode);
 
             foreach(var ticketMatch in ticket.TicketMatches)
             {
