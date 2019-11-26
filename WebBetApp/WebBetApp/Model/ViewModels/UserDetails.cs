@@ -10,5 +10,6 @@ namespace WebBetApp.Model.ViewModels
         public string UserName { get; set; }
         public string FullName { get; set; }
         public double UserWalletBalance { get; set; }
+        public string UserId { get; set; }
     }
 }

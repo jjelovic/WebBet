@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WebBetApp.Model.Database;
 using WebBetApp.Model.Database.DatabaseModel;
 using WebBetApp.Model.ViewModels;
 
@@ -12,16 +10,18 @@ namespace WebBetApp.Main
     {
         IEnumerable<WebMatchOffer> GetMatchesGroupedBySport();
 
-        void MakeTransaction(WebWallet webWalletDeposit, ApplicationUser user);
+        void MakeTransaction(WebWallet webWalletDeposit, string userId);
 
-        IEnumerable<WebTicket> GetAllTickets(ApplicationUser user);
+        IEnumerable<WebTicket> GetAllTickets(string userId);
 
-        void PostWebTicketToDb(WebTicket webTicket, ApplicationUser user);
+        List<string> PostWebTicketToDb(WebTicket webTicket, string userId);
 
-        void DeleteTicketFromDb(string ticketCode);
+        Ticket DeleteTicketFromDb(int ticketId);
 
-        WebWallet GetUserWalletBalance(ApplicationUser user);
+        WebWallet GetUserWalletBalance(string userId);
 
+        UserDetails GetUserDetails(string userId);
 
+        Task<IdentityResult> CreateUser(UserRegistration userRegistration);
     }
 }

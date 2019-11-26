@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebBetApp.Main;
-using WebBetApp.Model.Database;
-using WebBetApp.Model.Database.DatabaseModel;
 using WebBetApp.Model.ViewModels;
 
 namespace WebBetApp.Controllers
@@ -19,38 +11,41 @@ namespace WebBetApp.Controllers
     public class TicketController : ControllerBase
     {
         private readonly IWebBetQueries _webBetQueries;
-        private UserManager<ApplicationUser> _userManager;
 
-        public TicketController(IWebBetQueries webBetQueries, UserManager<ApplicationUser> userManager)
+        public TicketController(IWebBetQueries webBetQueries)
         {
             _webBetQueries = webBetQueries;
-            _userManager = userManager;
         }
 
-        // GET: api/Ticket
-        [HttpGet]
-        public async Task<IEnumerable<WebTicket>> GetTickets()
+        // GET: api/Ticket/userId
+        [HttpGet("{userId}")]
+        public IEnumerable<WebTicket> GetTickets(string userId)
         {
-            var user = await _userManager.FindByIdAsync(User.Claims.First(cl => cl.Type == "UserId").Value);
-
-            return _webBetQueries.GetAllTickets(user);
+            return _webBetQueries.GetAllTickets(userId);
         }
 
-        [HttpPost]
+        [HttpPost("{userId}")]
         [Authorize]
-        public async Task<IActionResult> PostTicket(WebTicket webTicket)
+        public IActionResult PostTicket(WebTicket webTicket, string userId)
         {
-            var user = await _userManager.FindByIdAsync(User.Claims.First(cl => cl.Type == "UserId").Value); 
+            var response = _webBetQueries.PostWebTicketToDb(webTicket, userId);
 
-            _webBetQueries.PostWebTicketToDb(webTicket, user);
-
-            return Ok();
+            if (response.Count == 0)
+                return Ok();
+            else
+                return BadRequest(new { message = response });
         }
 
-        [HttpDelete("{ticketCode}")]
-        public void DeleteTicket(string ticketCode)
+        [HttpDelete("{ticketId}")]
+        public IActionResult DeleteTicket(int ticketId)
         {
-            _webBetQueries.DeleteTicketFromDb(ticketCode);
+            var result = _webBetQueries.DeleteTicketFromDb(ticketId);
+
+            if (result != null)
+                return Ok(new { message = "Ticket deleted successfully"} );
+            else
+                return BadRequest(new { message = "Ticket was not found"} );
+            
         }
     }
 }

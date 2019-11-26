@@ -24,3 +24,4 @@ D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.AssemblyInfo.cs
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.RazorTargetAssemblyInfo.cache
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.dll
 D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.pdb
+D:\WebBet\WebBetApp\WebBetApp\obj\Debug\netcoreapp2.1\WebBetApp.csprojAssemblyReference.cache

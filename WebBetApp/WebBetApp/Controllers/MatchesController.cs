@@ -16,18 +16,18 @@ namespace WebBetApp.Controllers
     [ApiController]
     public class MatchesController : ControllerBase
     {
-        private readonly IWebBetQueries webBetQuries;
+        private readonly IWebBetQueries _webBetQuries;
 
         public MatchesController(IWebBetQueries webBetQuries)
         {
-            this.webBetQuries = webBetQuries;
+            _webBetQuries = webBetQuries;
         }
 
         // GET: api/Matches
         [HttpGet]
         public IEnumerable<WebMatchOffer> GetMatchesForWebOffer()
         {
-            return webBetQuries.GetMatchesGroupedBySport();
+            return _webBetQuries.GetMatchesGroupedBySport();
         }
     }
 }

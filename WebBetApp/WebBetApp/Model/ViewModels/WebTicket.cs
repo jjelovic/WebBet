@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebBetApp.Model.Database;
 using WebBetApp.Model.Database.DatabaseModel;
 
 namespace WebBetApp.Model.ViewModels
@@ -20,5 +21,7 @@ namespace WebBetApp.Model.ViewModels
 
         public double TotalMatchesCoefficient { get; set; }
         public IEnumerable<TicketMatch> TicketMatches { get; set; }
+        public ApplicationUser User { get; set; }
+        public double UserBalance { get; set; }
     }
 }

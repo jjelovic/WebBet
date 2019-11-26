@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using WebBetApp.Main;
 using WebBetApp.Model;
 using WebBetApp.Model.Database;
 using WebBetApp.Model.ViewModels;
@@ -23,39 +24,31 @@ namespace WebBetApp.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private readonly AppSettings _appSettings;
+        private readonly IWebBetQueries _webBetQueries;
 
         public ApplicationUserController( 
               UserManager<ApplicationUser> userManager,
               SignInManager<ApplicationUser> signInManager,
-              IOptions<AppSettings> appSettings
+              IOptions<AppSettings> appSettings,
+              IWebBetQueries webBetQueries
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
+            _webBetQueries = webBetQueries;
         }
 
         [HttpPost]
         [Route("Register")]
-        public async Task<Object> PostApplicationUser(UserRegistration user)
+        public async Task<IActionResult> PostApplicationUser(UserRegistration user)
         {
-            var appUser = new ApplicationUser()
-            {
-                UserName = user.UserName,
-                FullName = user.FullName,
-                Email = user.Email,
-            };
+            var result = await _webBetQueries.CreateUser(user);
 
-            try
-            {
-                var result = await _userManager.CreateAsync(appUser, user.Password);
-
+            if (result.Succeeded)
                 return Ok(result);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            else
+                return BadRequest( new { message = "User is not created"});
         }
 
         [HttpPost]
@@ -79,8 +72,8 @@ namespace WebBetApp.Controllers
                 var securityToken = tokenHandler.CreateToken(tokenDesc);
                 var token = tokenHandler.WriteToken(securityToken);
 
-                return Ok( new { token } );
-            } 
+                return Ok(new { token });
+            }
 
             else
                 return BadRequest(new { message = "Username or password are incorect" });
