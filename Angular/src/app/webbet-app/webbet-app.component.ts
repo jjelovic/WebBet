@@ -25,6 +25,7 @@ export class WebbetAppComponent implements OnInit {
     this.service.getUserDetalis().subscribe(
       res => {
         this.userService.userDetails = res as WebbetUserDetails;
+        
       },
       err => {
         console.log(err);

@@ -75,3 +75,8 @@ toastr npm install ngx-toastr --save i u angualr.json dodaono ispod styles.css "
 
 JWT - JSON Web Token korišten za autentikaciju
 https://jwt.io/introduction/
+
+
+Za validaciju korišten Fluent Validator - s Nugeta skinuta verzija 8.5.1
+
+Swashbuckle.AspNetCore 

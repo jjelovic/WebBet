@@ -3,6 +3,7 @@ import { element } from 'protractor';
 import { WebbetTicketMatch } from './webbet-ticket-match.model';
 export class WebbetTicket {
 
+    Id: number;
     ticketCode: string;
     stake : number;
     stakeWithManipulationCosts: number;
@@ -11,10 +12,11 @@ export class WebbetTicket {
     totalMatchesCoefficient: number;
     
 
-    constructor(stake,ticketCode, stakeWithManipulationCosts, possibleReturn, ticketMatches, totalMatchesCoefficient){
+    constructor(Id, stake,ticketCode, stakeWithManipulationCosts, possibleReturn, ticketMatches, totalMatchesCoefficient){
         
         let tempMatchArray = [];
 
+        this.Id = Id;
         this.stake = stake;
         this.ticketCode = ticketCode,
         this.stakeWithManipulationCosts = stakeWithManipulationCosts;

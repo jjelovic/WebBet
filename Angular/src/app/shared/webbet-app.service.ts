@@ -25,24 +25,24 @@ export class WebbetAppService {
     return this.http.get(this.rootURL + '/Matches');
   }
 
-  postWalletDeposit(walletFormData:WebbetWallet){
-    return this.http.post(this.rootURL + '/Wallet', walletFormData);
+  postWalletDeposit(walletFormData:WebbetWallet, userId: string){
+    return this.http.post(this.rootURL + '/Wallet/' + userId, walletFormData);
   }
 
-  getWalletBalance():Observable<any> {
-    return this.http.get(this.rootURL + '/Wallet');
+  getWalletBalance(userId: string):Observable<any> {
+    return this.http.get(this.rootURL + '/Wallet/' + userId);
   }
 
-  getAllTickets():Observable<any>{
-    return this.http.get(this.rootURL + '/Ticket');
+  getAllTickets(userId: string):Observable<any>{
+    return this.http.get(this.rootURL + '/Ticket/' + userId);
   }
 
-  postWebbetTicket(ticketFormData: WebbetTicket){
-    return this.http.post(this.rootURL + '/Ticket', ticketFormData);
+  postWebbetTicket(ticketFormData: WebbetTicket, userId:string){
+    return this.http.post(this.rootURL + '/Ticket/' + userId, ticketFormData);
   }
 
-  deleteWebbetTicket(webbetTicketCode: string){
-    return this.http.delete(this.rootURL + '/Ticket/' + webbetTicketCode);
+  deleteWebbetTicket(ticketId: number){
+    return this.http.delete(this.rootURL + '/Ticket/' + ticketId);
   }
 
   register( registrationBody: any){

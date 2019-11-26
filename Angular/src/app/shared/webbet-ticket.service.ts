@@ -4,6 +4,7 @@ import { WebbetWallet } from 'src/app/shared/webbet-wallet.model';
 import { WebbetTicket } from './webbet-ticket.model';
 import { Injectable } from '@angular/core';
 import { WebbetOffer } from './webbet-offer.model';
+import { WebbetUserService } from './webbet-user.service';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { WebbetOffer } from './webbet-offer.model';
 })
 export class WebbetTicketService {
 
-  constructor(private service : WebbetAppService) { }
+  constructor(private service : WebbetAppService, private userService : WebbetUserService) { }
 
   ticketFormData: WebbetTicket;
   wallet : WebbetWallet = new WebbetWallet(0);
@@ -44,7 +45,9 @@ export class WebbetTicketService {
  }
 
  updateWallateBalance() {
-  this.service.getWalletBalance().subscribe( res => {
+  let user = this.userService.userDetails;
+
+  this.service.getWalletBalance(user.userId).subscribe( res => {
     this.wallet = res as WebbetWallet;
   });
  }

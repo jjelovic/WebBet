@@ -10,7 +10,7 @@ export class WebbetUserService {
 
   constructor( private fb : FormBuilder ) {  }
 
-  userDetails : WebbetUserDetails = new WebbetUserDetails('', '', 0);
+  userDetails : WebbetUserDetails = new WebbetUserDetails('', '', 0, '');
 
   userRegistrationFormModel = this.fb.group({
     UserName : ['', Validators.required],
