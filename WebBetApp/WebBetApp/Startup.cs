@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 using WebBetApp.Main;
 using WebBetApp.Main.Validation;
 using WebBetApp.Model;
@@ -38,6 +40,8 @@ namespace WebBetApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IWebBetQueries, WebBetQuriesImpl>();
+            services.AddScoped<IValidator<WebTicket>, TicketValidator>();
+            //services.AddScoped<IValidator<WebWallet>, WalletValidator>();
 
             services.Configure<AppSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddDbContext<WebBetDbContext>(options =>
@@ -53,6 +57,11 @@ namespace WebBetApp
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 4;
+            });
+
+            services.AddSwaggerGen((options) =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "Webbet API", Version = "v1" });
             });
 
             services.AddCors();
@@ -87,10 +96,19 @@ namespace WebBetApp
                app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+
+            //Swagger JSON endponint
+            app.UseSwaggerUI(s =>
+            {
+               s.SwaggerEndpoint("/swagger/v1/swagger.json", "Webbet API");
+            });
+
             app.UseCors(options => options.WithOrigins(Configuration["ApplicationSettings:ClientUrl"].ToString())
                                           .AllowAnyMethod()
-                                          .AllowAnyHeader());
-            app.UseAuthentication();
+                                          .AllowAnyHeader()
+                                          .AllowAnyOrigin());
+            app.UseAuthentication(); 
 
             app.UseMvc();
 
