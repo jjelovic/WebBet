@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { WebbetAppService } from 'src/app/shared/webbet-app.service';
  import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { WebbetUserService } from 'src/app/shared/webbet-user.service';
 
 
 
@@ -21,7 +22,8 @@ export class WebbetWalletDepositComponent implements OnInit {
   constructor( 
     public dialogRef: MatDialogRef<WebbetWalletDepositComponent>, 
     private service: WebbetAppService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: WebbetUserService
     ) { }
 
   ngOnInit() {
@@ -32,7 +34,9 @@ export class WebbetWalletDepositComponent implements OnInit {
 
   onSubmit(form:NgForm){
 
-      this.service.postWalletDeposit(form.value).subscribe( res=> 
+      let user = this.userService.userDetails;
+
+      this.service.postWalletDeposit(form.value, user.userId).subscribe( res=> 
         {
           this.dialogRef.close();
           

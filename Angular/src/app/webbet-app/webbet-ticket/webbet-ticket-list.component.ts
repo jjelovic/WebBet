@@ -1,3 +1,4 @@
+import { WebbetUserService } from './../../shared/webbet-user.service';
 import { WebbetTicketMatch } from './../../shared/webbet-ticket-match.model';
 import { WebbetTicket } from './../../shared/webbet-ticket.model';
 import { Component, OnInit } from '@angular/core';
@@ -18,11 +19,12 @@ export class WebbetTicketListComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<WebbetTicketListComponent>, 
     private service: WebbetAppService,
-    private ticketService: WebbetTicketService
+    private ticketService: WebbetTicketService,
+    private userService: WebbetUserService
   ) { }
 
   ngOnInit() {
-    this.service.getAllTickets().subscribe(res => {
+    this.service.getAllTickets(this.userService.userDetails.userId).subscribe(res => {
         this.ticketList = res as WebbetTicket[];
     })
   }
@@ -36,7 +38,7 @@ export class WebbetTicketListComponent implements OnInit {
 
   deleteTicket(webbetTicketCode: string){
     this.service.deleteWebbetTicket(webbetTicketCode).subscribe( res => {
-            this.service.getAllTickets().subscribe(res => {
+            this.service.getAllTickets(this.userService.userDetails.userId).subscribe(res => {
               this.ticketList = res as WebbetTicket[];
               if(this.ticketList.length !== 0){
                  this.ticketService.ticketMatchesForPreview = this.ticketList[0].ticketMatches;

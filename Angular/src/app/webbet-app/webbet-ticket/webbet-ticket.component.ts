@@ -25,6 +25,8 @@ export class WebbetTicketComponent implements OnInit {
      private toastr: ToastrService,
      private router: Router) { }
 
+     user : WebbetUserDetails;
+
   ngOnInit() {
 
     this.resetForm();
@@ -54,8 +56,8 @@ export class WebbetTicketComponent implements OnInit {
   }
 
   saveTicket(ticket: WebbetTicket){
-    
-    this.service.postWebbetTicket(ticket).subscribe( res => {
+
+    this.service.postWebbetTicket(ticket, this.userService.userDetails.userId).subscribe( res => {
       this.resetForm();
 
       this.service.getUserDetalis().subscribe( res => {
@@ -81,6 +83,7 @@ export class WebbetTicketComponent implements OnInit {
 
   resetForm(){
     this.ticketService.ticketFormData = {
+      ticketId: 0,
       stake: 2,
       ticketCode: '',
       stakeWithManipulationCosts: 0,
