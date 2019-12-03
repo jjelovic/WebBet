@@ -36,8 +36,8 @@ export class WebbetTicketListComponent implements OnInit {
 
   }
 
-  deleteTicket(webbetTicketCode: string){
-    this.service.deleteWebbetTicket(webbetTicketCode).subscribe( res => {
+  deleteTicket(ticketId: number){
+    this.service.deleteWebbetTicket(ticketId).subscribe( res => {
             this.service.getAllTickets(this.userService.userDetails.userId).subscribe(res => {
               this.ticketList = res as WebbetTicket[];
               if(this.ticketList.length !== 0){

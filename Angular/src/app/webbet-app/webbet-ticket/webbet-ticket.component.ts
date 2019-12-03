@@ -83,7 +83,7 @@ export class WebbetTicketComponent implements OnInit {
 
   resetForm(){
     this.ticketService.ticketFormData = {
-      ticketId: 0,
+      Id: 0,
       stake: 2,
       ticketCode: '',
       stakeWithManipulationCosts: 0,
